@@ -49,7 +49,7 @@
         <ftpnet.version>3.5</ftpnet.version>
         <dadiyang.version>1.0.4</dadiyang.version>
 
-        <fileupload.version>1.3.1</fileupload.version>
+        <fileupload.version>1.3.3</fileupload.version>
     </properties>
 
     <!--只进行版本管理，不实际进行依赖-->
