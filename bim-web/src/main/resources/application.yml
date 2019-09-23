@@ -1,0 +1,91 @@
+#阿里云服务应用身份标识
+appCode: 016291c0c6f646c68ec9759f14876937
+#短信模板id
+TPid: TP1908098
+
+server:
+  port: 8180
+
+#设置上传下载地址
+filePath:
+  tempWorkBasePath: D:/data/appfiles  #临时目录地址
+  saveFileBasePath: D:/data/appfiles/model  #合并后文件地址
+  transformationFilePath: D:/data/appfiles/modelLightWeight  #转换后模型文件存放地址
+  voicePath: D:/data/appfiles/voice #问题录音存放地址
+
+#企业微信所用参数
+qyWeChat:
+  bimAppId: ww875267b761c96228 #企业微信的BIM应用appId
+  bimCorpsecret: qst6NyCGkwfdRkWmqDHitOhVlGHcE8DVF8-JNySLtbk #bim应用corpsecret
+  addressBookCorpsecret: OodDeV_fvC6tjHznhR2GNN-6xRCK3F2E2WU2IHX_AWw #通讯录应用corpsecret
+
+
+#设置ftp地址
+ftpPath:
+  accountNumber: 111111111@qq.com #账号
+  password: 111111111  #密码
+  ftpIp: 192.168.98.145 #ftp服务ip
+  ftpPort: 21 #ftp服务端口
+  ftpFilePath: /model #ftp服务器储存地址
+
+spring:
+  mvc:
+    static:
+      path:
+        pattern: /**
+  banner:
+    location: classpath:banner1.txt
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: root
+    username: root
+    url: jdbc:mysql://192.168.89.3:3306/zhongye_bim?characterEncoding=UTF-8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      connection-properties: druid.stat.mergeSql=true
+      max-idle: 8
+      min-idle: 8
+      max-active: 20
+      initial-size: 10
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-file-size: 2048MB #设置单个文件最大长度
+      max-request-size: 2048MB #最大请求文件的大小
+  #rabbitmq
+  rabbitmq:
+    host: 192.168.98.137
+    port: 5672
+    username: BIMConverter
+    password: Znp02lZSynsw
+
+  #指定环境为测试环境
+  profiles:
+    active: dev
+
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      table-underline: true
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+logging:
+  config: classpath:logback-spring.xml
+  logging.path: D:/Bim_log
+
+
+pagehelper:
+  reasonable: false # 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+  support-methods-arguments: true
+  params: count=countSql
+  row-bounds-with-count: true
+  helper-dialect: mysql

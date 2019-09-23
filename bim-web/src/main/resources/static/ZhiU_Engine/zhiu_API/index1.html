@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>ZhiUViewer 使用说明</h1><hr>
+<h2>目录</h2><ul>
+<li>1.初始化<ul>
+<li>a) HTML基础设置及脚本引用</li>
+<li>b) Viewer初始化</li>
+</ul>
+</li>
+<li>2.基础使用</li>
+<li>3.通知中心基础使用</li>
+<li>4.目前已有通知</li>
+<li>5.插件使用<ul>
+<li>a) 插件注册</li>
+<li>b) 目前已有的插件通知</li>
+<li>c) 进度动画插件</li>
+<li>d) ThreeJs模块插件</li>
+</ul>
+</li>
+<li>6.API位置</li>
+</ul>
+<hr>
+<h2>1.初始化</h2><h4>-- a) HTML基础设置及css引用</h4><pre class="prettyprint source lang-html"><code>&lt;!--&lt;!DOCTYPE html>-->
+&lt;html>
+       &lt;head>
+            &lt;meta charset=&quot;UTF-8&quot;>
+            &lt;title>知优Viewer&lt;/title>
+            &lt;div id=“MyViewerDiv”>&lt;/div> &lt;!--该div为Viewer专用div-->
+            &lt;script src=&quot;ZhiU_Engine/zhiu_Foundation/ZhiUTech_ResourceLoader.js&quot;>&lt;/script>
+        &lt;/head>
+&lt;/html>
+</code></pre><h4>-- b) Viewer初始化</h4><pre class="prettyprint source lang-javascript"><code>    // 声明主句柄
+    var zhiu = {};
+
+    // 加载所需资源 参数为加载成功后的回调
+    ZhiUTech_ResourcesLoader(_SuccessAction);
+
+    // 请确定所有操作在回调后执行
+    function _SuccessAction() {
+        // 初始化主句柄
+        zhiu = InitializeZhiUViewer();// 如果传参数false可以关闭所有内部DebugLog
+        // 创建所需div
+        let div = document.getElementById('MyViewerDiv');
+        let modelPath = '请放入模型地址';
+        // 初始化viewer结构  参数详见API 该func返回模型GUID
+        let model1Index=zhiu.L_Initialize(div, modelPath);
+        // 根据上述信息生成viewer浏览器
+        zhiu.L_Build();
+
+        // 如需添加更多模型 按下方添加
+        //let model2Index=zhiu.L_LoadModelWithPath(&quot;model/RedHouse/RedHouse.esd&quot;);
+    }
+
+    // 卸载viewer 请确保时序
+    // zhiu.L_Finish();
+</code></pre><hr>
+<h2>2.基础使用</h2><pre class="prettyprint source lang-javascript"><code>    // 获取构件ID
+    zhiu.L_GetNowSelectionId();
+    // 修改当前选中构件的颜色
+    zhiu.L_SetNowSelectionColor(0,255,255,255);
+    // 获取当前选中构建的所有属性
+    zhiu.L_GetNowSelectionProperties(function (arg) {
+        console.log(' >LJason&lt; 日志：属性', arg);
+        });</code></pre><hr>
+<h2>3.通知中心基础使用</h2><pre class="prettyprint source lang-javascript"><code>    // 通知中心句柄
+    // ZhiUTech_MsgCenter
+    // 注册事件  参数一: 事件名称  参数二: 事件回调  (如果需要删除事件,请勿用匿名或lambda)
+    ZhiUTech_MsgCenter.L_AddListener(&quot;事件名称&quot;,ExampleCallback);
+    // 发送事件  参数一: 事件名称  参数二: 所需参数,根据监听方是否需要参数来设置 (请确认好参数)
+    ZhiUTech_MsgCenter.L_SendMsg(&quot;事件名称&quot;,[&quot;参数列表&quot;,&quot;可根据具体监听设立参数&quot;]); 
+    // 删除事件  参数一: 事件名称  参数二: 事件回调  (如果需要删除事件,请勿用匿名或lambda)
+    ZhiUTech_MsgCenter.L_RemoveListener(&quot;事件名称&quot;,ExampleCallback);
+
+    // 演示的function
+    function ExampleCallback() {
+        // TODO
+        // 如果有参数加上即可
+    }</code></pre><hr>
+<h2>4.当前已注册的事件</h2><pre class="prettyprint source lang-javascript"><code>// 以下所有function均用lambda标识,替换为同样参数的function即可
+
+
+// --------可以监听的事件--------
+// 在viewer初始化成功后执行
+ZhiUTech_MsgCenter.L_AddListener(&quot;初始化成功&quot;,()=>{});// 无参数
+// 在模型开始加载前执行
+ZhiUTech_MsgCenter.L_AddListener(&quot;模型开始加载&quot;,(ModelOptions)=>{});// ModelOptions类型请在API页面查看
+// 模型首次加载成功后的回调 (仅首次生效)
+ZhiUTech_MsgCenter.L_AddListener(&quot;首次模型加载成功&quot;,(Model)=>{});// Model为该模型句柄
+// 模型加载成功后的回调 (每次模型加载都会调用)
+ZhiUTech_MsgCenter.L_AddListener(&quot;模型加载成功&quot;, (Model)=>{});// Model为该模型句柄
+// 构件选择变更后调用
+ZhiUTech_MsgCenter.L_AddListener(&quot;构件选择变更&quot;,(IdArray)=>{});// IdArray为变更后的id数组,如果未选中则为空数组
+// 模型卸载成功后的回调 (每次模型加载都会调用)
+ZhiUTech_MsgCenter.L_AddListener(&quot;模型卸载成功&quot;, (Model)=>{});// Model为该模型句柄
+// 当相机产生变化后的回调
+ZhiUTech_MsgCenter.L_AddListener(&quot;相机更新&quot;, (arg)=>{});// arg 相机参数
+// 当构件隐藏后的回调
+ZhiUTech_MsgCenter.L_AddListener(&quot;构件隐藏&quot;,(IdArray)=>{});// IdArray为变更后的id数组,如果未选中则为空数组
+// 当构件隔离后的回调
+ZhiUTech_MsgCenter.L_AddListener(&quot;构件隔离&quot;,(IdArray)=>{});// IdArray为变更后的id数组,如果未选中则为空数组
+// 当构件选择变更后的回调 特性面板专用回调
+ZhiUTech_MsgCenter.L_AddListener(&quot;特性面板构件选择变更&quot;,(properties)=>{});// properties 构件属性 如果当前选中的总数大于1,或未选中时将会为undefined
+// 3D标注初始化成功事件(用于回复标注)
+ZhiUTech_MsgCenter.L_AddListener(&quot;3D标注初始化成功&quot;,()=>{});//
+// 保存默认视角后的回调
+ZhiUTech_MsgCenter.L_AddListener(&quot;保存默认视角&quot;,(cameraData)=>{});// cameraData 相机字符串属性
+// 二维码数据页面专用数据包
+ZhiUTech_MsgCenter.L_AddListener(&quot;二维码数据页面专用数据&quot;,(data)=>{});// data 二维码数据包(后台专用)
+
+// --------可以发送的事件--------
+// 用于控制所有构件显示隐藏
+ZhiUTech_MsgCenter.L_SendMsg(&quot;全部显示隐藏&quot;, [needCallback,isVisible]);// needCallback 是否需要回调(该回调控制树状栏,非特殊情况请填写true) ; isVisible 是否显示所有构件
+// 清除所有构件颜色
+ZhiUTech_MsgCenter.L_SendMsg(&quot;清除全部颜色&quot;);// 无参数 
+// 强制刷新所有 场景 缓存 叠加层
+ZhiUTech_MsgCenter.L_SendMsg(&quot;强制刷新&quot;);// 无参数 
+// 根据ID隔离构件
+ZhiUTech_MsgCenter.L_SendMsg(&quot;根据ID隔离构件&quot;, IdArray);// IdArray 单个id或者id数组
+// 根据ID更改构件颜色
+ZhiUTech_MsgCenter.L_SendMsg(&quot;根据ID更改构件颜色&quot;, [IdArray,Vector4]);// IdArray 单个id或者id数组 ; Vector4 THREE.Vector4 的颜色 rgba 0-1范围
+//添加物体到指定场景 如果不清楚作用请不要随意使用
+ZhiUTech_MsgCenter.L_SendMsg(&quot;添加物体到场景&quot;, [SceneName,Object,isLife]);// SceneName 场景名称 ; Object需要添加的物体 ; isLife 该参数请确认清楚，不填写为正常使用！ true为加入默认动态场景(用于射线) false为加入默认静态场景(用于展示)
+// 删除物体到置顶场景 如果不清楚作用请不要随意使用
+ZhiUTech_MsgCenter.L_SendMsg(&quot;删除物体到场景&quot;, [SceneName,Object,isLife]);// SceneName 场景名称 ; Object需要添加的物体 ; isLife 该参数请确认清楚，不填写为正常使用！ true为加入默认动态场景(用于射线) false为加入默认静态场景(用于展示)
+// 刷新THREEJS场景
+ZhiUTech_MsgCenter.L_SendMsg(&quot;刷新THREEJS场景&quot;);// 无参数 
+// 更新THREEJS物体的旋转 用于相机跟随
+ZhiUTech_MsgCenter.L_SendMsg(&quot;更新网格旋转&quot;, Mesh);// Mesh THREEJS物体
+// 根据ID选择构件 (备注:该方法不会清空选择,需要单独清空)
+ZhiUTech_MsgCenter.L_SendMsg(&quot;根据ID选择构件&quot;, IdArray);// IdArray 单个id或者id数组
+// 清除所有选择
+ZhiUTech_MsgCenter.L_SendMsg(&quot;清除所有选择&quot;);// 无参数 
+// 根据ID聚焦构件
+ZhiUTech_MsgCenter.L_SendMsg(&quot;根据ID聚焦构件&quot;, IdArray);// IdArray 单个id或者id数组
+// 根据ID隐藏构件
+ZhiUTech_MsgCenter.L_SendMsg(&quot;根据ID隐藏构件&quot;, IdArray);// IdArray 单个id或者id数组
+// 获取所有构件ID
+let result=[[],NeedArray];
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取所有构件ID&quot;, result);// result[0] 用于装填id的Array容器; NeedArray(result[1]) boolean值 true为纯数组,false为模型序号和id组的键值对
+// 获取当前选中构件的体积总和
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前选中构件体积&quot;, (volume)=>{});// volume 体积总和
+// 获取当前选中的构件属性(仅一个) 特性面板专用
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前构件特性&quot;,(properties)=>{});// properties 为选中构件属性,如果未选中,或者选中数量大于1,将会返回undefined 
+// 获取当前构件子属性(仅一个) 
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前构件子属性&quot;,(properties)=>{});// properties 为选中构件属性,如果未选中,或者选中数量大于1,将会返回undefined  属性名为key 属性值为value
+// 设置是否全屏
+ZhiUTech_MsgCenter.L_SendMsg(&quot;全屏开关&quot;,isFullScreen);// isFullScreen 是否全屏的boolean
+// 获取当前构件的id
+let temp = [];
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前构件ID&quot;, temp);// temp[0] 是当前选中的所有id数组
+// 刷新view页面比例 (页面防黑)
+ZhiUTech_MsgCenter.L_SendMsg(&quot;刷新VIEW页面比例&quot;);
+
+// DebugLog事件
+// 参数分为三种形式 信息,空信息,信息和错误对象,数组可无限拓展
+ZhiUTech_MsgCenter.L_SendMsg(&quot;日志&quot;, Message);// Message 日志信息
+ZhiUTech_MsgCenter.L_SendMsg(&quot;警告&quot;, []);// 不传参或空数组将会打印空
+ZhiUTech_MsgCenter.L_SendMsg(&quot;错误&quot;, [Message,ErrorObject1,ErrorObject2]);// Message 日志信息 ; ErrorObject 错误对象(可随意长度)
+
+// 测量工具事件
+// 打开距离测量工具
+ZhiUTech_MsgCenter.L_SendMsg(&quot;打开距离测量&quot;);
+// 打开角度测量工具
+ZhiUTech_MsgCenter.L_SendMsg(&quot;打开角度测量&quot;);
+// 打开校准测量工具
+ZhiUTech_MsgCenter.L_SendMsg(&quot;打开校准测量&quot;);
+// 获取当前测量单位
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前测量单位&quot;,(units)=>{});// units 测量单位字符串
+// 设置当前测量单位
+ZhiUTech_MsgCenter.L_SendMsg(&quot;设置当前测量单位&quot;,units);// units 测量单位字符串
+// 获取当前测量精度
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取当前测量精度&quot;,(percision)=>{});// percision 测量精度整数
+// 设置当前测量精度
+ZhiUTech_MsgCenter.L_SendMsg(&quot;设置当前测量精度&quot;,percision);// percision 测量精度整数
+// 删除当前测量
+ZhiUTech_MsgCenter.L_SendMsg(&quot;删除当前测量&quot;);
+// 关闭测量
+ZhiUTech_MsgCenter.L_SendMsg(&quot;关闭测量&quot;);
+
+// 截面工具事件
+// 设置截面
+ZhiUTech_MsgCenter.L_SendMsg(&quot;设置截面&quot;,mode);// mode 类型string 截面模式 共四种 x,y,z,box
+// 关闭截面
+ZhiUTech_MsgCenter.L_SendMsg(&quot;关闭截面&quot;);
+
+// 分解模型工具事件
+// 设置分解模型的大小
+ZhiUTech_MsgCenter.L_SendMsg(&quot;设置分解模型&quot;,scale);// scale 类型float 0-1
+// 关闭分解模型
+ZhiUTech_MsgCenter.L_SendMsg(&quot;关闭分解模型&quot;);
+
+// 过滤器工具事件
+// 过滤当前选中构件的体积
+ZhiUTech_MsgCenter.L_SendMsg(&quot;过滤体积&quot;,[volume,isGreater,needEqual]);// 参数1: volume 体积阈值 ; 参数2: isGreater true是大于,false为小于 ;  参数3: needEqual true为包含等于,false为不包含等于
+// 过滤当前选中构件的名称
+ZhiUTech_MsgCenter.L_SendMsg(&quot;过滤名称&quot;,[name,isIgnore]);// 参数1: name 名称关键字 ; 参数2: isIgnore true不包含关键字,false为仅包含关键字
+
+// 树状图工具
+// 获取高级筛选所需信息 (筛选栏专用)
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取索引信息&quot;,limitMsg);// limitMsg.limitNameList 限制关键字; limitMsg.limitDic 符合要求的名称 数组套数组; limitMsg.objectTotal 构件总数
+// 获取高级筛选的结果 (筛选栏专用)
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取索引结果&quot;,[list,needSelect,(obj)=>{}]);// list: {Array} 装有关键字的数组; needSelect: {boolean} 是否需要选中筛选结果; obj.limitDic 符合要求的名称 数组套数组; obj.resultArray 符合要求的构件id数组
+// 获取父级属性名称 用于设置面板
+ZhiUTech_MsgCenter.L_SendMsg(&quot;获取父级属性名&quot;, (list)=>{});// list: string[] 父级属性名
+// 刷新树状图聚焦位置(仅两树切换时)
+ZhiUTech_MsgCenter.L_SendMsg(&quot;刷新树状图聚焦位置&quot;);
+</code></pre><hr>
+<h2>5.插件使用</h2><h4>-- a) 插件注册</h4><pre class="prettyprint source lang-javascript"><code>    // 注册插件
+    ZhiUTech_MsgCenter.L_AddListener(&quot;初始化成功&quot;, function () {
+        Initialize_ZhiUTech_ProgressAnimation(zhiu);// 进度动画插件
+        Initialize_ZhiUTech_ThreeJsMaker(zhiu);// ThreeJs模块插件
+    });</code></pre><h4>-- b) 目前已有的插件通知</h4><pre class="prettyprint source lang-javascript"><code>    // 以下所有function均用lambda标识,替换为同样参数的function即可
+
+
+    // --------可以监听的事件--------
+    // 保存工区主向量的回调
+    ZhiUTech_MsgCenter.L_AddListener(&quot;保存工区主向量&quot;,(workAreaMainDirectionData)=>{});// workAreaMainDirectionData 工区主向量的起点和终点
+
+    // --------可以发送的事件--------
+    // 用于控制里程碑显示隐藏
+    ZhiUTech_MsgCenter.L_SendMsg(&quot;开关里程碑&quot;,isShow);// isShow boolean值 是否显示里程碑
+    // 用于控制工区信息板工区盒子显示隐藏
+    ZhiUTech_MsgCenter.L_SendMsg(&quot;开关工区&quot;,isShow);// isShow boolean值 是否显示工区    
+    // 打开框选 (实验性功能)
+    ZhiUTech_MsgCenter.L_SendMsg(&quot;打开框选&quot;,SuccessCallback);// SuccessCallback 框选成功后的回调
+
+</code></pre><h4>-- c) 进度动画插件</h4><pre class="prettyprint source lang-javascript"><code>
+    // 该组件可以让构件根据施工状态分别显示
+    // 状态有三种  透明->未动工 ; 染色->正在施工 ; 正常->施工完成
+
+    // 进度动画 主句柄
+    // zhiu.ZhiUTech_ProgressAnimation
+
+    // 设置正在建设的构件颜色
+    zhiu.ZhiUTech_ProgressAnimation.L_SetColor(red,green,blue,alpha);// rgba均为0-255范围
+    // 开关所有构件显示,且清空所有颜色
+    zhiu.ZhiUTech_ProgressAnimation.L_SetVisibility(isShow);// isShow 是否显示所有构件
+    // 设置进度动画
+    zhiu.ZhiUTech_ProgressAnimation.L_SetVisibility(showIdList, colorIdList);// showIdList 施工完成的构件 ; colorIdList 正在施工的构件</code></pre><h4>-- d) ThreeJs模块插件</h4><pre class="prettyprint source lang-javascript"><code>
+    // 该组件可以生成 工区包围盒 工区信息板 里程碑
+    // 当前样式为固定格式(后续将开放修改)
+
+    // ThreeJs模块 主句柄
+    // zhiu.ZhiUTech_ThreeJsMaker
+
+    // 工区包围盒及工区信息板 数据格式
+    let areaBoxData={};
+    areaBoxData.FirstPos=new THREE.Vector3(0,0,0);// 工区起点 可不区分前后
+    areaBoxData.SecondPos=new THREE.Vector3(0,0,0);// 工区终点 可不区分前后
+    areaBoxData.BoxColor=&quot;#ffffff&quot;;// 工区盒子颜色
+    areaBoxData.IsBoxEnable=true;// 工区盒子是否显示
+    areaBoxData.AreaName=&quot;AreaName&quot;;// 工区名称
+    areaBoxData.AreaManager=&quot;AreaManager&quot;;// 工区管理
+    areaBoxData.AreaLabor=&quot;AreaLabor&quot;;// 人力
+    areaBoxData.AreaMachine=&quot;AreaMachine&quot;;// 机械
+    areaBoxData.AreaMaterial=&quot;AreaMaterial&quot;;// 材料
+    areaBoxData.AreaProductivity=&quot;AreaProductivity&quot;;// 产值
+    let areaBoxDataList=[areaBoxData];
+
+    // 创建工区包围盒及信息面板
+    // areaBoxDataList 工区信息数组 ; workAreaMsgPanelHeight : 工区信息牌高度 ; workAreaBoxWidth : 工区盒子的宽度 ; workAreaBoxTop : 工区盒子的顶部高度 ; workAreaBoxBottom : 工区盒子的底部高度 ; 
+    zhiu.ZhiUTech_ThreeJsMaker.L_BuildWorkArea(areaBoxDataList, workAreaMsgPanelHeight, workAreaBoxWidth, workAreaBoxTop, workAreaBoxBottom);
+    // 设置工区包围盒及信息面板可见
+    zhiu.ZhiUTech_ThreeJsMaker.L_SetWorkAreaVisibility(isShow);// isShow 是否显示
+    // 清除所有工区包围盒及信息面板
+    zhiu.ZhiUTech_ThreeJsMaker.L_ClearAllWorkArea();
+    // 设置主向量 用于控制包围盒的具体方向
+    zhiu.ZhiUTech_ThreeJsMaker.L_SetMainVector(firstVector3,secondVector3);// firstVector3 第一个向量 ; secondVector3 第二个向量 ;
+
+
+    // 里程碑 数据格式
+    let milepostData={};
+    milepostData.Position=new THREE.Vector3(0,0,0);// 位置
+    milepostData.Content=&quot;10km+500m&quot;;// 里程碑内容
+    let milepostDataList=[milepostData];
+
+    // 创建里程碑面板
+    zhiu.ZhiUTech_ThreeJsMaker.L_BuildMilepost(milepostDataList);// milepostDataList 里程碑信息数组
+    // 设置里程碑显示隐藏
+    zhiu.ZhiUTech_ThreeJsMaker.L_SetMilepostVisibility(isShow);// isShow 是否显示
+    // 清除所有里程碑面板
+    zhiu.ZhiUTech_ThreeJsMaker.L_ClearAllMilepost();</code></pre><hr>
+<h2>6.API位置</h2><p><a href="http://ljason.coding.me/ZhiU_Viewer-Foundation/ZhiU_Engine/zhiu_API/">http://ljason.coding.me/ZhiU_Viewer-Foundation/ZhiU_Engine/zhiu_API/</a></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CameraData.html">CameraData</a></li><li><a href="HitInfo.html">HitInfo</a></li><li><a href="ModelOptions.html">ModelOptions</a></li><li><a href="PropertiesPanelMsg.html">PropertiesPanelMsg</a></li><li><a href="SelectionData.html">SelectionData</a></li><li><a href="TouchMsg.html">TouchMsg</a></li></ul><h3>Global</h3><ul><li><a href="global.html#InitializeZhiUViewer">InitializeZhiUViewer</a></li><li><a href="global.html#L_Build">L_Build</a></li><li><a href="global.html#L_CameraGoMainView">L_CameraGoMainView</a></li><li><a href="global.html#L_ClearAllColor">L_ClearAllColor</a></li><li><a href="global.html#L_ClearColorById">L_ClearColorById</a></li><li><a href="global.html#L_ClearNowSelectionColor">L_ClearNowSelectionColor</a></li><li><a href="global.html#L_ClearSelection">L_ClearSelection</a></li><li><a href="global.html#L_Finish">L_Finish</a></li><li><a href="global.html#L_FocusNowSelection">L_FocusNowSelection</a></li><li><a href="global.html#L_FocusObject">L_FocusObject</a></li><li><a href="global.html#L_GetCameraData">L_GetCameraData</a></li><li><a href="global.html#L_GetCameraModePerspective">L_GetCameraModePerspective</a></li><li><a href="global.html#L_GetNowSelectionId">L_GetNowSelectionId</a></li><li><a href="global.html#L_GetNowSelectionProperties">L_GetNowSelectionProperties</a></li><li><a href="global.html#L_GetNowSelectionVolume">L_GetNowSelectionVolume</a></li><li><a href="global.html#L_GetObjectNameWithId">L_GetObjectNameWithId</a></li><li><a href="global.html#L_GetPropertiesById">L_GetPropertiesById</a></li><li><a href="global.html#L_HideModelWithIndex">L_HideModelWithIndex</a></li><li><a href="global.html#L_HideNowSelection">L_HideNowSelection</a></li><li><a href="global.html#L_HideWithId">L_HideWithId</a></li><li><a href="global.html#L_HideWithName">L_HideWithName</a></li><li><a href="global.html#L_Initialize">L_Initialize</a></li><li><a href="global.html#L_InitializeWithOptions">L_InitializeWithOptions</a></li><li><a href="global.html#L_IsolateNowSelection">L_IsolateNowSelection</a></li><li><a href="global.html#L_IsolateWithId">L_IsolateWithId</a></li><li><a href="global.html#L_IsolateWithName">L_IsolateWithName</a></li><li><a href="global.html#L_LoadModelWithModelOptions">L_LoadModelWithModelOptions</a></li><li><a href="global.html#L_LoadModelWithPath">L_LoadModelWithPath</a></li><li><a href="global.html#L_SearchModelWithName">L_SearchModelWithName</a></li><li><a href="global.html#L_SetAllVisibility">L_SetAllVisibility</a></li><li><a href="global.html#L_SetCameraDefaultViewState">L_SetCameraDefaultViewState</a></li><li><a href="global.html#L_SetCameraMode">L_SetCameraMode</a></li><li><a href="global.html#L_SetCameraWithData">L_SetCameraWithData</a></li><li><a href="global.html#L_SetColorWithId">L_SetColorWithId</a></li><li><a href="global.html#L_SetGhosting">L_SetGhosting</a></li><li><a href="global.html#L_SetNowSelectionColor">L_SetNowSelectionColor</a></li><li><a href="global.html#L_SetProgressLogo">L_SetProgressLogo</a></li><li><a href="global.html#L_SetSelect">L_SetSelect</a></li><li><a href="global.html#L_SetSelectColor">L_SetSelectColor</a></li><li><a href="global.html#L_SetViewerPosition">L_SetViewerPosition</a></li><li><a href="global.html#L_SetViewerSize">L_SetViewerSize</a></li><li><a href="global.html#L_ShowAllModel">L_ShowAllModel</a></li><li><a href="global.html#L_ShowModelWithHideKey">L_ShowModelWithHideKey</a></li><li><a href="global.html#L_UnloadAllMode">L_UnloadAllMode</a></li><li><a href="global.html#L_UnloadModelWithIndex">L_UnloadModelWithIndex</a></li><li><a href="global.html#L_UnloadModelWithModelGUID">L_UnloadModelWithModelGUID</a></li><li><a href="global.html#L_UnloadModelWithModelName">L_UnloadModelWithModelName</a></li><li><a href="global.html#L_UnloadModelWithModelPath">L_UnloadModelWithModelPath</a></li><li><a href="global.html#zhiu_ChangeAllMaterialColor">zhiu_ChangeAllMaterialColor</a></li><li><a href="global.html#zhiu_ClearLocalStorage">zhiu_ClearLocalStorage</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowNameWithId">zhiu_FilterTool_FilterNowNameWithId</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowSelectionName">zhiu_FilterTool_FilterNowSelectionName</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowSelectionVolume">zhiu_FilterTool_FilterNowSelectionVolume</a></li><li><a href="global.html#zhiu_FilterTool_FilterVolumeWithId">zhiu_FilterTool_FilterVolumeWithId</a></li><li><a href="global.html#zhiu_GetAggregateDataWithId">zhiu_GetAggregateDataWithId</a></li><li><a href="global.html#zhiu_GetAllIds">zhiu_GetAllIds</a></li><li><a href="global.html#zhiu_GetAllModels">zhiu_GetAllModels</a></li><li><a href="global.html#zhiu_GetCameraStringData">zhiu_GetCameraStringData</a></li><li><a href="global.html#zhiu_GetGUID">zhiu_GetGUID</a></li><li><a href="global.html#zhiu_GetModelIndexWithModel">zhiu_GetModelIndexWithModel</a></li><li><a href="global.html#zhiu_GetModelInstanceTree">zhiu_GetModelInstanceTree</a></li><li><a href="global.html#zhiu_GetModelLength">zhiu_GetModelLength</a></li><li><a href="global.html#zhiu_GetModelWithModelGUID">zhiu_GetModelWithModelGUID</a></li><li><a href="global.html#zhiu_GetModelWithModelIndex">zhiu_GetModelWithModelIndex</a></li><li><a href="global.html#zhiu_GetScreenShot">zhiu_GetScreenShot</a></li><li><a href="global.html#zhiu_GetUnitOfMeasurement">zhiu_GetUnitOfMeasurement</a></li><li><a href="global.html#zhiu_GetUnitOfScale">zhiu_GetUnitOfScale</a></li><li><a href="global.html#zhiu_PersistentCameraDataToLocal">zhiu_PersistentCameraDataToLocal</a></li><li><a href="global.html#zhiu_RefreshScene">zhiu_RefreshScene</a></li><li><a href="global.html#zhiu_ResetCameraWithLocalData">zhiu_ResetCameraWithLocalData</a></li><li><a href="global.html#zhiu_SearchObjectWithProperty">zhiu_SearchObjectWithProperty</a></li><li><a href="global.html#zhiu_SearchObjectWithPropertyByModel">zhiu_SearchObjectWithPropertyByModel</a></li><li><a href="global.html#zhiu_SetCameraWithStringData">zhiu_SetCameraWithStringData</a></li><li><a href="global.html#zhiu_SetModelVisibility">zhiu_SetModelVisibility</a></li><li><a href="global.html#zhiu_SetUnitOfMeasurement">zhiu_SetUnitOfMeasurement</a></li><li><a href="global.html#zhiu_THREEEJS_DeleteAll3DPoint">zhiu_THREEEJS_DeleteAll3DPoint</a></li><li><a href="global.html#zhiu_THREEEJS_Set3DPointVisible">zhiu_THREEEJS_Set3DPointVisible</a></li><li><a href="global.html#zhiu_THREEJS_AddObject">zhiu_THREEJS_AddObject</a></li><li><a href="global.html#zhiu_THREEJS_AddRaycast3DPointListener">zhiu_THREEJS_AddRaycast3DPointListener</a></li><li><a href="global.html#zhiu_THREEJS_AddRaycastListener">zhiu_THREEJS_AddRaycastListener</a></li><li><a href="global.html#zhiu_THREEJS_CreateScene">zhiu_THREEJS_CreateScene</a></li><li><a href="global.html#zhiu_THREEJS_Delete3DPoint">zhiu_THREEJS_Delete3DPoint</a></li><li><a href="global.html#zhiu_THREEJS_DeleteAllObject">zhiu_THREEJS_DeleteAllObject</a></li><li><a href="global.html#zhiu_THREEJS_DeleteObject">zhiu_THREEJS_DeleteObject</a></li><li><a href="global.html#zhiu_THREEJS_DeleteScene">zhiu_THREEJS_DeleteScene</a></li><li><a href="global.html#zhiu_THREEJS_GetSceneWithName">zhiu_THREEJS_GetSceneWithName</a></li><li><a href="global.html#zhiu_THREEJS_GetTouchPoint">zhiu_THREEJS_GetTouchPoint</a></li><li><a href="global.html#zhiu_THREEJS_Make3DPoint">zhiu_THREEJS_Make3DPoint</a></li><li><a href="global.html#zhiu_THREEJS_RefreshScene">zhiu_THREEJS_RefreshScene</a></li><li><a href="global.html#zhiu_THREEJS_ToggleRaycast">zhiu_THREEJS_ToggleRaycast</a></li><li><a href="global.html#zhiu_ToggleFullScreen">zhiu_ToggleFullScreen</a></li><li><a href="global.html#zhiu_UnloadModelWithModel">zhiu_UnloadModelWithModel</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Jul 08 2019 11:27:37 GMT+0800 (GMT+08:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

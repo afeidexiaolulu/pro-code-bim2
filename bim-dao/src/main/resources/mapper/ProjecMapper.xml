@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.ProjectMapper">
+    <resultMap id="projectMap" type="com.zy.bim.bean.Project">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="projectName" column="project_name" />
+        <result property="ProjectAddress" column="project_address" />
+        <result property="projectDescription" column="project_description" />
+        <result property="img" column="img"/>
+        <result property="projectManager" column="project_manager" />
+        <result property="createPerson" column="create_person" />
+        <result property="createTime" column="create_time" />
+        <result property="updatePerson" column="update_person" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <resultMap id="projectMapUser" type="com.zy.bim.bean.Project">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="projectName" column="project_name" />
+        <result property="ProjectAddress" column="project_address" />
+        <result property="projectDescription" column="project_description" />
+        <result property="img" column="img"/>
+        <result property="projectManager" column="user_name" />
+        <result property="createPerson" column="create_person" />
+        <result property="createTime" column="create_time" />
+        <result property="updatePerson" column="update_person" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <resultMap id="t_user" type="com.zy.bim.bean.User">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="userName" column="user_name" />
+        <result property="email" column="email" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="passWord" column="pass_word"/>
+        <result property="type" column="type" />
+        <result property="salt" column="salt" />
+        <result property="department" column="department" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <sql id="findAll">
+           p.id,p.project_name,p.project_address,p.project_description,p.img,p.project_manager,p.create_person,p.create_time,p.update_person,p.update_time
+    </sql>
+
+    <sql id="findAllUser">
+           p.id,p.project_name,p.project_address,p.project_description,p.img,p.create_person,p.create_time,p.update_person,p.update_time
+    </sql>
+    <!-- 插入一个项目 -->
+    <insert id="addproject" parameterType="com.zy.bim.bean.Project" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_project (project_name,project_address,project_description,project_manager,create_person,create_time,img)
+        values(#{projectName},#{ProjectAddress},#{projectDescription},#{projectManager},#{createPerson},#{createTime},#{img});
+    </insert>
+
+    <!--添加项目管理员-->
+    <insert id="addprojectRole" parameterType="com.zy.bim.bean.Project" >
+        insert into t_user_role_project(project_id,user_id,role_id,create_time) values (#{id},#{createPerson},'1',#{createTime})
+    </insert>
+    <!--添加项目经理-->
+    <insert id="addprojectManager" parameterType="com.zy.bim.bean.Project" >
+        insert into t_user_role_project(project_id,user_id,role_id,create_time) values (#{id},#{projectManager},'2',#{createTime})
+    </insert>
+
+    <!--修改项目信息-->
+    <update id="updateProject" parameterType="com.zy.bim.bean.Project">
+        update t_project set
+        <if test="projectName != null and projectName !=''">
+            project_name = #{projectName},
+        </if>
+        <if test="ProjectAddress != null and ProjectAddress !=''">
+            project_address = #{ProjectAddress},
+        </if>
+        <if test="projectDescription != null and projectDescription !=''">
+            project_description = #{projectDescription},
+        </if>
+        <if test="img != null and img !=''">
+            img = #{img},
+        </if>
+        update_person=#{updatePerson},update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <!--查询用户信息-->
+    <select id="findUser" parameterType="String" resultType="map">
+      select id,user_name as name from t_user where 1=1
+          and user_name like concat('%',#{userName},'%');
+    </select>
+
+    <!--查询项目-->
+    <select id="findAllproject" resultMap="projectMap" parameterType="map">
+        select  DISTINCT p.id as aaa,u.user_name as createPersonName,u.phone_number as createPersonPhoneNumber,
+          <include refid="findAll"/>
+          from  t_project p LEFT JOIN t_user_role_project urp on p.id=urp.project_id,t_user u where urp.user_id=#{userId} AND u.id = p.create_person
+        <if test="projectName != null and projectName !=''">
+            and p.project_name like concat('%',#{projectName},'%')
+        </if>
+    </select>
+
+    <!--查询项目详情-->
+    <select id="projectDetail" parameterType="String" resultMap="projectMapUser">
+        select  <include refid="findAllUser"/>, GROUP_CONCAT(u.user_name) as user_name,(
+        SELECT
+        user1.user_name
+        FROM
+        t_project pro
+        LEFT JOIN t_user user1 ON pro.create_person = user1.id
+        WHERE
+        pro.id = p.id
+        ) AS createPersonName  from t_project p left join t_user_role_project urp on
+        p.id=urp.project_id LEFT JOIN t_user u on urp.user_id=u.id
+        where p.id=#{projectId} and urp.role_id='2'
+
+    </select>
+    <!--查询项目下人员列表-->
+    <select id="projectAllUser" parameterType="String" resultType="com.zy.bim.bean.User">
+       select tu.id as id,tu.user_name as userName,r.role_name as department  from t_project tp LEFT JOIN t_user_role_project urp on tp.id=urp.project_id LEFT JOIN t_role r on urp.role_id=r.id LEFT JOIN t_user tu on tu.id=urp.user_id
+      where tp.id=#{projectId}
+    </select>
+    <!--查询问题列表  controller做了分页-->
+    <select id="projectProblem" parameterType="String" resultType="com.zy.bim.bean.Problem">
+      select problem.grade as grade,problem.id as id,problem.problem_name as problemName from t_problem_list problem LEFT JOIN t_project  pro on problem.parent_id=pro.id where pro.id=#{value }
+    </select>
+
+    <!--删除时查看角色信息-->
+    <select id="findRole" parameterType="map" resultType="map">
+        select r.id as id ,IFNULL(p.img,"") as img from t_user_role_project urp LEFT JOIN t_role r on
+         urp.role_id=r.id LEFT JOIN t_project p on urp.project_id=p.id where urp.project_id=#{ProjectId} and urp.user_id=#{userId} and urp.role_id=#{role}
+    </select>
+
+    <!--根据项目id查找问题-->
+    <select id="findRroblem" parameterType="map" resultType="string">
+        select id from t_problem_list where parent_id=#{ProjectId}
+    </select>
+
+
+    <!--根据id查找图纸 -->
+    <select id="findProblemImgList" parameterType="list" resultType="String">
+      select GROUP_CONCAT(file.file_path) as img from t_file_attachment file  where
+        1=1
+        and
+        file.problem_id  in
+       <foreach collection="list"  item="tag" separator="," index="index" open="(" close=")">
+          #{tag}
+        </foreach>
+    </select>
+
+
+    <!--根据项目id查询模型-->
+    <select id="findModelList" resultType="map" parameterType="map">
+        SELECT
+               ifnull( model.model_img,"") as id,ifnull(file.file_path,"")	as path
+        FROM
+            t_model model
+            LEFT JOIN t_file_attachment file ON model.model_img = file.id
+            where model.parent_id=#{ProjectId}
+    </select>
+    <!--级联删除  项目表 模型表  和问题列表 项目角色用户中间表-->
+    <delete  id="deleteProjectAll" parameterType="string">
+        DELETE t_project, t_problem_list,t_user_role_project,t_model,t_model_share
+        FROM
+            t_project
+            LEFT JOIN t_problem_list ON t_project.id = t_problem_list.parent_id
+            left join t_user_role_project on t_project.id=t_user_role_project.project_id
+            LEFT JOIN t_model on t_project.id = t_model.parent_id
+            LEFT JOIN t_model_share on t_project.id = t_model_share.parent_id
+        WHERE
+            t_project.id =#{value}
+    </delete >
+
+    <!--根据问题id删除附件表-->
+    <delete id="deleteFileattachment" parameterType="list">
+      delete from t_file_attachment where problem_id in
+      <foreach collection="list" open="(" close=")" separator="," index="index" item="id">
+          #{id}
+      </foreach>
+    </delete>
+    <!--根据模型id删除附件表-->
+    <delete id="deleteModelFileattachment" parameterType="list">
+         delete from t_file_attachment where id in
+        <foreach collection="list" open="(" close=")" separator="," index="index" item="id">
+          #{id.id}
+        </foreach>
+    </delete>
+
+    <!--根据人员id查询相关项目-->
+    <select id="getProjectByUserId" resultType="com.zy.bim.bean.ProjectVO">
+         select DISTINCT tp.id, tp.project_name from t_project tp
+         left join t_user_role_project tu on tp.id = tu.project_id
+         WHERE tu.user_id = #{userId}
+    </select>
+
+    <!--根据创建人id查询创建人姓名-->
+    <select id="getCreatePersonNameById" parameterType="string" resultType="string">
+         select user_name from t_user WHERE id = #{createPersonId}
+    </select>
+</mapper>

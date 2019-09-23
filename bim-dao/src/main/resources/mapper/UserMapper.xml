@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.UserMapper">
+
+    <select id="queryUserByLike" resultType="com.zy.bim.bean.User">
+        select id, user_name, phone_number, email from t_user
+        <where>
+            <if test="userName != null">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+
+            <if test="phoneNumber != null">
+                and phone_number like concat('%',#{phoneNumber},'%')
+            </if>
+
+            <if test="email != null">
+                and email like concat('%',#{email},'%')
+            </if>
+        </where>
+    </select>
+
+    <!--返回vo-->
+    <select id="userUserVO" resultType="com.zy.bim.bean.UserVO">
+        select  distinct tu.id, tuu.id as user_id, tp.project_name, tuu.user_name, tr.role_name, tuu.phone_number, tuu.email
+        from t_role tr
+        left join t_user_role_project tu on tr.id = tu.role_id
+        left join t_project tp on tp.id = tu.project_id
+        left join  t_user tuu on tu.user_id = tuu.id
+        where tuu.id in
+        <foreach collection="userIds" item="item" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+        and project_id = #{projectId}
+        and tuu.user_name like concat('%',#{membershipName},'%')
+        <if test='queryRole == "项目经理"'>
+        and tr.role_name = '项目经理'
+        </if>
+        <if test='queryRole == "项目管理员"'>
+            and tr.role_name = '项目管理员'
+        </if>
+        <if test='queryRole == "项目成员"'>
+            and tr.role_name = '项目成员'
+        </if>
+        <if test='orderCon == "userName"'>
+            order by
+            concat('convert(',user_name,'using gbk)')
+        </if>
+        <if test='orderCon == "roleName"'>
+            order by
+            concat('convert(',role_name,'using gbk)')
+        </if>
+        <if test='orderMethod == "asc"'>
+            asc
+        </if>
+        <if test='orderMethod == "desc"'>
+            desc
+        </if>
+    </select>
+    <!--查询同一项目成员-->
+    <select id="queryUserByProject" parameterType="java.lang.Integer" resultType="com.zy.bim.bean.UserVO">
+        SELECT DISTINCT
+	        u.id,
+	        u.user_name
+        FROM
+	        t_user u
+	    LEFT JOIN t_user_role_project up ON u.id = up.user_id
+        WHERE
+	    up.project_id = #{projectId}
+    </select>
+
+    <select id="queryUserByUesrNameAndPhoneNumber" resultType="com.zy.bim.bean.User">
+        select id, user_name, phone_number, email from t_user
+        <where>
+            <if test="uesrNameAndPhoneNumber != null">
+                user_name like concat('%',#{uesrNameAndPhoneNumber},'%') or phone_number like concat('%',#{uesrNameAndPhoneNumber},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

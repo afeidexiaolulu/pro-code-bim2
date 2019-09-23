@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/newBuild.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/webuploader.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/webuploader.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <script src="../../static/js/addProblem.js"></script>
+    <style>.webuploader-pick{padding:inherit;height: 110px;}</style>
+</head>
+
+<body>
+    <div class="layui-contain">
+        <form class="layui-form" action="" enctype="multipart/form-data" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">问题名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="QuestionName"  lay-verify="QuestionName" placeholder="请输入问题名称"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属项目：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="SubordinateProjects"  class="layui-input" readonly
+                        value="北京市海淀区这是修改的">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">重要等级：</label>
+                <div class="layui-input-block">
+                    <select name="ImportantLevel" lay-verify="ImportantLevel">
+                        <option value=""></option>
+                        <option value="十分重要">十分重要</option>
+                        <option value="重要">重要</option>
+                        <option value="普通">普通</option>
+                        <option value="不重要">不重要</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">问题截图：</label>
+                <div id="uploader" class="layui-input-block wu-example uploaderScreenshot">
+                    <div class="screenshotIMG Add">
+                        <a href="javascript:;">
+                            <img src="../../static/img/background.png">
+                            <span class="iconfont icon-xinjian" data-type="NewAdd"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">问题描述：</label>
+                <div class="layui-input-block">
+                    <textarea name="QuestionDescribe"  lay-verify="QuestionDescribe" placeholder="请输入描述"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button type="button" class="layui-btn layui-btn-darkblue" lay-submit  id="yes">确定</button>
+                <button type="button" class="layui-btn layui-btn-primary" data-type="close">取消</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+</body>
+
+</html>

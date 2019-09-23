@@ -1,0 +1,110 @@
+<!--<!DOCTYPE html>-->
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../webAppJs/css/layui.css">
+    <script src="../../../webAppJs/js/jquery-3.1.1.min.js"></script>
+    <script src="../../../webAppJs/js/layer_mobile/layer.js"></script>
+    <script src="../../../webAppJs/js/base.js"></script>
+
+    <div id="MyViewerDiv"></div>
+    <!--该div为Viewer专用div-->
+    <div id="MyViewerDiv01"></div>
+    <!--该div为双开Viewer的子窗口-->
+    <script src="../../../webAppJs/ZhiU_Engine/zhiu_UI/js/ZhiUTech_ResourceLoader.js"></script>
+    <script src="../../../webAppJs/layui/layui.js"></script>
+    <script>
+        layui.use(['layer'], function () {
+            var layer = layui.layer;
+            var $ = layui.$;
+
+            if (getParameterFromUrl("id") == "") {
+                BIM.open({
+                    content: '获取项目失败',
+                    skin: 'msg',
+                    time: 2
+                });
+            } else {
+                $.ajax({
+                    url: getRootPath() + "/bim/model/queryLightweightModelPath",
+                    type: "post",
+                    data: {
+                        modelId: getParameterFromUrl("id")
+                    },
+                    beforeSend: function () {
+                        layer.load(2);
+                    },
+                    complete: function () {
+                        layer.closeAll('loading');
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            zhiu_Viewer(data.data);
+                        } else {
+                            BIM.open({
+                                content: '\u53d1\u751f\u9519\u8bef',
+                                skin: 'msg',
+                                time: 2
+                            });
+                        }
+                    },
+                    error: function () {
+                        BIM.open({
+                            content: '\u53d1\u751f\u9519\u8bef\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5',
+                            skin: 'msg',
+                            time: 2
+                        });
+                    }
+                })
+            }
+        });
+
+
+        function zhiu_Viewer(Url_data) {
+            // 声明主句柄
+            var zhiu_Viewer = {};
+            ZhiUTech_ResourcesLoader(_SuccessAction);
+            // 加载所需资源 参数为加载成功后的回调
+            // 请确定所有操作在回调后执行
+            function _SuccessAction() {
+                // region 初始化教程
+                // 初始化主句柄
+                zhiu_Viewer = InitializeZhiUViewer(); // 如果传参数false可以关闭所有内部DebugLog
+
+                // 创建所需div
+                let div = document.getElementById('MyViewerDiv');
+                let modelPath = getRootPath() + '/model/modelLightWeight/' + Url_data + '/zhongYeBIM.esd'; // 请放入模型地址
+                // 初始化viewer结构  参数详见API 该func返回模型GUID
+                let model1Index = zhiu_Viewer.L_Initialize(div, modelPath);
+                // 根据上述信息生成viewer浏览器
+                zhiu_Viewer.L_Build();
+                ZhiUTech_MsgCenter.L_AddListener("初始化成功", function () {
+                    Initialize_ZhiUTech_BoxSelection(zhiu_Viewer);
+                    Initialize_ZhiUTech_ProgressAnimation(zhiu_Viewer); //进度动画插件
+                    Initialize_ZhiUTech_NewTree(zhiu_Viewer, true);
+                    Initialize_ZhiUTech_UI(zhiu_Viewer); //UI界面
+                    Initialize_ZhiUTech_QRCode(zhiu_Viewer);
+                    Initialize_ZhiUTech_ThreeJsMaker(zhiu_Viewer); //ThreeJs模块插件
+                    // Initialize_ZhiUTech_Settings(zhiu_Viewer); //设置
+                    Initialize_ZhiUTech_CloneGeometry(zhiu_Viewer);
+                    // ZhiUTech_MsgCenter.L_AddListener("二维码数据页面专用数据",function (arg) {
+                    //     console.log(" >LJason< 日志：",arg);
+                    // });
+                });
+            }
+            // region 树状图按键功能
+            window._isTreeDivOpen = false;
+
+            function btn_ToggleTreeDivision() {
+                window._isTreeDivOpen = !window._isTreeDivOpen;
+                zhiu_Viewer.ZhiUTech_NewTree._member.SetDivisionVisibility(window._isTreeDivOpen);
+            }
+        }
+
+    </script>
+</head>
+
+</html>

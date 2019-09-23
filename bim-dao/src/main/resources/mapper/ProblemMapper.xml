@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.ProblemMapper">
+    <resultMap id="projectMap" type="com.zy.bim.bean.Project">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="projectName" column="project_name" />
+        <result property="ProjectAddress" column="project_address" />
+        <result property="projectDescription" column="project_description" />
+        <result property="img" column="img"/>
+        <result property="projectManager" column="project_manager" />
+        <result property="createPerson" column="create_person" />
+        <result property="createTime" column="create_time" />
+        <result property="updatePerson" column="update_person" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+    <resultMap id="ProblemMap" type="com.zy.bim.bean.Problem">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="parentId" column="parent_id" />
+        <result property="grade" column="grade" />
+        <result property="problemScreenshots" column="problem_screenshots" />
+        <result property="createTime" column="create_time"/>
+        <result property="createPerson" column="create_person" />
+        <result property="updatePerson" column="update_person" />
+        <result property="updateTime" column="update_time" />
+        <result property="problemName" column="problem_name" />
+        <result property="describes" column="problem_describe" />
+    </resultMap>
+
+    <resultMap id="ProblemImg" type="com.zy.bim.bean.Problem">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="parentId" column="parent_id" />
+        <result property="grade" column="grade" />
+        <result property="problemScreenshots" column="problem_screenshots" />
+        <result property="createTime" column="create_time"/>
+        <result property="createPerson" column="create_person" />
+        <result property="updatePerson" column="update_person" />
+        <result property="updateTime" column="update_time" />
+        <result property="problemName" column="problem_name" />
+    </resultMap>
+    <sql id="findAll">
+        list.id,list.parent_id,list.grade,list.create_time,list.create_person,list.update_person,list.update_time,list.problem_name,list.problem_describe
+    </sql>
+    <insert id="create" parameterType="com.zy.bim.bean.Problem" useGeneratedKeys="true" keyProperty="id">
+        insert into t_problem_list(parent_id,grade,problem_screenshots,create_time,problem_name,create_person,problem_describe,problem_describe_recording)
+        values (#{parentId},#{grade},#{problemScreenshots},#{createTime},#{problemName},#{createPerson},#{describes},#{problemDescribeRecording})
+    </insert>
+
+    <update id="update" parameterType="com.zy.bim.bean.Problem">
+        update t_problem_list set
+        <if test="grade != null and grade !=''">
+            grade = #{grade},
+        </if>
+        <if test="problemName != null and problemName !=''">
+            problem_name = #{problemName},
+        </if>
+        <if test="describes != null and describes !=''">
+            problem_describe = #{describes},
+        </if>
+        <if test="problemDescribeRecording != null and problemDescribeRecording !=''">
+            problem_describe_recording = #{problemDescribeRecording},
+        </if>
+        update_person=#{updatePerson},update_time=#{updateTime}
+        where id=#{id}
+    </update>
+
+    <select id="findAll" parameterType="com.zy.bim.bean.Problem" resultType="com.zy.bim.bean.Problem">
+        select list.id as id,list.grade as grade,list.problem_name as problemName,list.problem_screenshots as problemScreenshots,list.create_time as createTime,list.update_person as updatePerson,
+        list.update_time as updateTime,project.project_name as parentId,userto.user_name as createPerson from t_problem_list list
+         LEFT JOIN t_user userto on list.create_person=userto.id
+        left  join t_project project on list.parent_id=project.id where  1=1
+        <if test="parentId != null and parentId !=''">
+          and list.parent_id = #{parentId}
+        </if>
+
+        <if test="problemName != null and problemName !=''">
+            and  list.problem_name   like concat('%',#{problemName},'%')
+        </if>
+     <!--   <choose>
+            <when test="sort !=null and sort != ''">
+                order by ${sort} ${rule}
+            </when>
+            <otherwise>
+                order by  list.create_time desc
+            </otherwise>
+        </choose>-->
+
+    </select>
+
+    <select id="findOne" parameterType="com.zy.bim.bean.Problem" resultType="com.zy.bim.bean.Problem">
+        select list.id as id,list.grade as grade,list.create_time as createTime,list.update_person as updatePerson,list.problem_name as problemName ,
+        list.update_time as updateTime,project.project_name as problemScreenshots,userto.user_name as createPerson , list.problem_describe as describes, list.problem_describe_recording as problemDescribeRecording from t_problem_list list
+         LEFT JOIN t_user userto on list.create_person=userto.id
+        left  join t_project project on list.parent_id=project.id  where list.id=#{id}
+    </select>
+
+    <delete id="delete" parameterType="Integer">
+        delete from t_problem_list where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteImg" parameterType="Integer">
+        delete from t_file_attachment where problem_id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteOneImg" parameterType="Integer">
+        delete from t_file_attachment where id=#{id}
+    </delete>
+
+    <select id="findProblem" parameterType="Integer" resultMap="ProblemMap">
+        select <include refid="findAll"/> from t_problem_list list where list.id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--根据id查找图纸 -->
+    <select id="findProblemImg" parameterType="Integer" resultType="String">
+      select GROUP_CONCAT(file.file_path) as img from t_file_attachment file  where file.problem_id =#{value}
+    </select>
+
+    <select id="findOneProject" parameterType="String" resultMap="projectMap">
+       select project_name,id,project_address,project_description,img,project_manager from t_project where id=#{value}
+    </select>
+
+
+    <select id="findOneProble" parameterType="com.zy.bim.bean.Problem" resultType="string">
+        select id from t_problem_list where problem_name=#{problemName} and problem_describe=#{describes} and grade=#{grade}
+    </select>
+
+
+    <insert id="createImg" parameterType="list">
+        insert into t_file_attachment(problem_id,file_path,create_time,create_by,store_type,ext) values
+        <foreach collection="list"  separator="," item="item">
+            (#{item.id},#{item.img},#{item.createTime},#{item.creteBy},#{item.storeType},#{item.ext})
+        </foreach>
+    </insert>
+</mapper>

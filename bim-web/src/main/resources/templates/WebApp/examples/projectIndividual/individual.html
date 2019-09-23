@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>BIM轻量化图形平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../webAppJs/css/layui.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/file_icon.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/index.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/individual.css">
+    <script src="../../../webAppJs/js/jquery-3.1.1.min.js"></script>
+    <script src="../../../webAppJs/js/jquerysession.js"></script>
+    <script src="../../../webAppJs/js/webuploader.js"></script>
+    <script src="../../../webAppJs/js/1346.js"></script>
+    <script src="../../../webAppJs/js/jquery.qrcode.min.js"></script>
+    <script src="../../../webAppJs/js/qrcode.js"></script>
+    <script src="../../../webAppJs/js/html2canvas.min.js"></script>
+    <script src="../../../webAppJs/js/layer_mobile/layer.js"></script>
+    <script src="../../../webAppJs/js/base.js"></script>
+    <script type="text/javascript" src="../../../webAppJs/js/jquery-latest.js"></script>
+    <script type="text/javascript" src="../../../webAppJs/js/jweixin-1.2.0.js"></script>
+</head>
+
+<body>
+<div class="Search"></div>
+<div class="individual">
+    <div class="individual_left"><img src="../../../webAppJs/images/default.png" alt=""></div>
+    <div class="individual_right">
+        <div class="individual_right_content">
+            <div class="StaffName"><strong>未知</strong></div>
+            <div><span class="Cell_phoneNumber">未知</span><span class="department">未知</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="homepage">
+    <div class="homepageDIV">
+        <p data-type="personal_ShareDiv"><span class="BIM-iconfont BIMfenxiang"></span><span>我创建的分享</span><span class="BIM-iconfont BIMyoujiantou"></span></p>
+        <p data-type="my_Question"><span class="BIM-iconfont BIMwenti"></span><span>我的问题</span><span class="BIM-iconfont BIMyoujiantou"></span><span class="layui-badge-dot layui-bg-red"></span></p>
+        <p><span class="BIM-iconfont BIMjifen"></span><span>剩余积分</span><span class="BIM-iconfont BIMyoujiantou"></span></p>
+    </div>
+</div>
+<div id="refreshContainer"></div> <!--分享-->
+<div class="my_Question"></div> <!--我的问题-->
+<div class="unhandled_Issues"></div> <!--未处理问题-->
+<div class="issues_Addressed"></div> <!--已处理问题-->
+<div class="questDetailHtml"></div> <!--问题详情-->
+
+<nav class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item" href="index">
+        <span class="BIM-iconfont BIMxiangmuzhuye"></span>
+        <span class="mui-tab-label">项目主页</span>
+    </a>
+    <a class="mui-tab-item" href="power">
+        <span class="BIM-iconfont BIMquanxianguanli"></span>
+        <span class="mui-tab-label">权限管理</span>
+    </a>
+    <a class="mui-tab-item mui-active gerenzhuye" href="individual">
+        <span class="BIM-iconfont BIMgerenzhuye"></span>
+        <span class="mui-tab-label">个人主页</span>
+        <span class="layui-badge-dot"></span>
+    </a>
+    <a class="mui-tab-item" href="services">
+        <span class="BIM-iconfont BIMzengzhifuwu"></span>
+        <span class="mui-tab-label">增值服务</span>
+    </a>
+</nav>
+<script src="../../../webAppJs/layui/layui.js"></script>
+<script src="../../../webAppJs/js/individual.js"></script>
+</body>
+
+</html>

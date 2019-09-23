@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/newBuild.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/webuploader.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/webuploader.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <style>
+        .webuploader-pick {
+            color: #1E9FFF;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-contain">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="entryName" class="layui-input" readonly="readonly" value="未知">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">模型名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ModelName" required lay-verify="ModelName" placeholder="请输入模型名称"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item ToolsUsed">
+                <label class="layui-form-label">建模所用的工具软件及版本：</label>
+                <div class="layui-input-block">
+                    <select name="ToolsUsed" lay-verify="ToolsUsed">
+                        <option value=""></option>
+                        <option value="Revit 2016">Revit 2016</option>
+                        <option value="Revit 2017">Revit 2017</option>
+                        <option value="Revit 2018">Revit 2018</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否公开</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="isopen" value="是" title="是" checked>
+                    <input type="radio" name="isopen" value="否" title="否">
+                </div>
+            </div>
+
+            <div id="uploader" class="layui-form-item wu-example">
+                <table class="layui-table" lay-skin="nob">
+                    <thead>
+                        <tr>
+                            <th>文件名</th>
+                            <th>大小</th>
+                            <th>上传进度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="file_name">未知</td>
+                            <td class="file_size">未知</td>
+                            <td class="progress_bar">
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td><span id="picker">添加文件</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <em>备注：目前支持<strong> rvt </strong>格式的模型上传</em>
+            </div>
+        </form>
+        <div class="layui-form-item">
+            <button class="layui-btn layui-btn-darkblue" lay-submit data-type="formDemo">确定</button>
+            <button type="button" class="layui-btn layui-btn-primary" data-type="close">取消</button>
+        </div>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+
+    <script>
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form;
+            var layer = layui.layer;
+
+            $("input[name='entryName']").val(parent.parent.parent.$('.ENTRYNAME').html() == null ? "未知" : parent.parent.parent
+                .$('.ENTRYNAME').html());
+
+            active = {
+                formDemo: function () {
+                    if ($("input[name='ModelName']").val() == "") {
+                        layer.msg('请输入模型名称', {
+                            icon: 5,
+                            anim: 6
+                        });
+                    }else if ($("select[name='ToolsUsed'] option:selected").val() == "") {
+                        layer.msg('请选择建模工具', {
+                            icon: 5,
+                            anim: 6
+                        });
+                    } else if ($(".file_size").html() == "未知") {
+                        layer.msg('请上传附件模型', {
+                            icon: 5,
+                            anim: 6
+                        });
+                    } else {
+                        $.ajax({
+                            url: getRootPath() + "/bim/model/modelInsert",
+                            type: "post",
+                            data: {
+                                modelName: $("input[name='ModelName']").val(),
+                                toolType: $("select[name='ToolsUsed'] option:selected").val(),
+                                isOpen: $("input[name='isopen']:checked").val(),
+                                modelSize: $(".file_size").html() == "未知" ? "0" : $(".file_size").html(),
+                                modelImg: fileAdd
+                            },
+                            beforeSend: function () {
+                                layer.load(2);
+                            },
+                            complete: function () {
+                                layer.closeAll('loading');
+                            },
+                            success: function (data) {
+                                $maskof();
+                                if (data.success == true) {
+                                    let index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                } else {
+                                    layer.msg(data.message);
+                                    let index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);
+                                }
+                            },
+                            error: function () {
+                                layer.msg("请求失败，请稍后再试", {
+                                    icon: 5,
+                                    anim: 6
+                                });
+                            }
+                        })
+                    }
+                },
+                close: function () {
+                    $.ajax({
+                        url: getRootPath() + "/bim/model/cancelModelInsert",
+                        type: "post",
+                        data: {
+                            modelImg: fileAdd //文件夹名称
+                        },
+                        beforeSend: function () {
+                            layer.load(2);
+                        },
+                        complete: function () {
+                            layer.closeAll('loading');
+                        },
+                        success: function (data) {
+                            $maskof();
+                            if (data.success == true) {
+                                layer.msg(data.message, function () {
+                                    let i = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(i);
+                                });
+                            } else {
+                                let i = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(i);
+                            }
+                        },
+                        error: function () {
+                            layer.msg("请求失败，请稍后再试", {
+                                icon: 5,
+                                anim: 6
+                            });
+                        }
+                    })
+                }
+            }
+
+
+            $('.layui-form-item button').click(function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            })
+        });
+
+
+        $("input[name='ModelName']").change('input', function () {
+            $.ajax({
+                url: getRootPath() + "/bim/model/checkModelNameRepetition",
+                type: "post",
+                data: {
+                    modelName: $(this).val(),
+                },
+                beforeSend: function () {
+                    layer.load(2);
+                },
+                complete: function () {
+                    layer.closeAll('loading');
+                },
+                success: function (data) {
+                    if (data.success == true) {
+                        // layer.msg(data.message);
+                    } else if (data.success == false) {
+                        // layer.msg(data.message);
+                        layer.msg("有重复的模型名，请重新输入", { icon: 5,anim: 6, time: 800 }, function () {
+                            $("input[name='ModelName']").val("")
+                        });
+                    }
+                },
+                error: function () {
+                    layer.msg("请求失败，请稍后再试", {
+                        icon: 5,
+                        anim: 6
+                    });
+                }
+            })
+        })
+
+        //上传
+        //实例化
+        var fileAdd = ""; //文件夹名称
+        var GUID = WebUploader.Base.guid(); //一个GUID
+        var uploader = WebUploader.create({
+            server: getRootPath() + '/bim/file/uploadFile', //服务器地址
+            formData: {
+                guid: GUID
+            },
+            pick: '#picker', // 选择文件的按钮。可选.
+            auto: true, // 是否开启自动上传
+            chunked: true, // 是否开启分片处理
+            chunkSize: 3 * 1024 * 1024, // 每片3M,
+            chunkRetry: false, // 如果失败，则不重试
+            threads: 1, // 上传并发数。允许同时最大上传进程数.
+            fileSizeLimit: 2 * 1024 * 1024 * 1024,
+            resize: false,
+            accept: { // 只允许选择rvt文件。
+                title: 'CAD',
+                extensions: 'rvt',
+                mimeTypes: '.rvt'
+            },
+            method: 'POST'
+        });
+        // 上传队列，仅包括等待上传的文件
+        var _queue = [];
+        // 当有文件被添加进队列的时候
+        uploader.on('fileQueued', function (file) {
+            _queue.push(file);
+            draw_page(_queue);
+        });
+
+        //绘制页面
+        function draw_page(_queue) {
+            console.log(_queue);
+            for (var i = 0; i < _queue.length; i++) {
+                $(".file_name").parent("tr").attr("id", _queue[i].id);
+                $(".file_name").html(_queue[i].name);
+                $(".file_size").html(getfilesize(_queue[i].size));
+            }
+        }
+
+        // 上传过程中触发，携带上传进度
+        uploader.on('uploadProgress', function (file, percentage) {
+            $(".progress-bar").css('width', percentage * 100 + '%');
+
+        });
+
+        //开始上传
+        uploader.on('startUpload', function (file) {
+            $(".layui-form-item button").addClass("layui-btn-disabled");
+        });
+
+        // 当文件上传成功时触发
+        uploader.on("uploadSuccess", function (file) {
+            $.post(getRootPath() + '/bim/file/mergingChunks', {
+                "id": file.id,
+                "name": file.name,
+                "size": file.size,
+                "lastModifiedDate": file.lastModifiedDate
+            }, function (data) {
+                if (data.success == true) {
+                    fileAdd = data.data.fileAdd;
+                    layer.msg('上传成功!', {
+                        anim: -1
+                    }, function () {
+                        $(".layui-form-item button").removeClass("layui-btn-disabled");
+                    });
+                } else {
+                    $("#close").removeClass("layui-btn-disabled");
+                    layer.msg('上传出错!');
+                }
+            });
+        });
+
+        // 当文件上传出错时触发
+        uploader.on('uploadError', function (file) {
+            $("#close").removeClass("layui-btn-disabled");
+            layer.msg('\u4e0a\u4f20\u51fa\u9519!');
+        });
+
+        // 验证文件格式以及文件大小
+        uploader.on("error", function (type) {
+            if (type == "Q_TYPE_DENIED") {
+                layer.msg("文件格式无法转换，请上传rvt格式文件");
+            } else if (type == "Q_EXCEED_SIZE_LIMIT") {
+                layer.msg("文件大小不能超过2G");
+            } else if (type == "Q_EXCEED_NUM_LIMIT") {
+                layer.msg("超出数量限制");
+            } else {
+                layer.msg("上传出错！请检查后重新上传！错误代码" + type);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

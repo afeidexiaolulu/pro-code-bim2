@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/AuthorityManagement.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <script src="../../static/js/AuthorityManagement.js"></script>
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-form-item ">
+            <form class="layui-form" action="">
+
+                <div class="tableThead">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="300">
+                            <col width="200">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>普通成员</th>
+                                <th>项目经理</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="tableTbody">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="300">
+                            <col width="200">
+                            <col width="200">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            <tr id="123">
+                                <td>新建问题</td>
+                                <td><input type="checkbox" name="Ordinary_New" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Ordinary_New">
+                                </td>
+                                <td><input type="checkbox" name="Manager_New" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Manager_New">
+                                </td>
+                            </tr>
+                            <tr id="456">
+                                <td>删除问题</td>
+                                <td><input type="checkbox" name="Ordinary_Delete" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Ordinary_Delete">
+                                </td>
+                                <td><input type="checkbox" name="Manager_Delete" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Manager_Delete">
+                                </td>
+                            </tr>
+                            <tr id="789">
+                                <td>基本信息编辑</td>
+                                <td><input type="checkbox" name="Ordinary_Edit" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Ordinary_Edit">
+                                </td>
+                                <td><input type="checkbox" name="Manager_Edit" lay-skin="switch" lay-text="开启|关闭"
+                                        lay-filter="Manager_Edit">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="layui-btn layui-btn-darkblue" data-type="change_Permission">确定</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+</body>
+
+</html>

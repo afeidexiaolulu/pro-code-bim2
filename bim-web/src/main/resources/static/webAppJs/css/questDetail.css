@@ -1,0 +1,243 @@
+.questDetail {
+	margin: 0.13333333rem;
+	padding: 0.13333333rem;
+	background: #FFFFFF;
+}
+
+.questDetail p {
+	border-bottom: 0.01333333rem solid #e1e1e1;
+	padding: 0.06666666rem 0;
+	font-size: 0.18666666rem;
+}
+
+.explain,
+.picture,
+.record {
+	padding: 0.06666666rem 0;
+	font-size: 0.18666666rem;
+	border-bottom: 0.01333333rem solid #e1e1e1;
+}
+
+.explain p {
+	text-indent: 2em;
+	border: none;
+}
+
+.questDetail p span {
+	float: right;
+}
+
+.questDetail p span.BIM-iconfont {
+	font-size: 0.18666666rem;
+	line-height: 1.3;
+}
+
+.layui-btn {
+	width: 2rem;
+}
+
+.layui-form-item {
+	text-align: center;
+}
+
+/* 记录 */
+.record_list {
+	margin-top: 0.06666666rem;
+	min-height: 0.2rem;
+	height: 100%;
+	border-radius: 0.13333333rem;
+	border: 0.01333333rem dashed;
+}
+.record_listDiv:nth-of-type(odd) .record_name {
+	color: #66ad66;
+}
+.record_listDiv:nth-of-type(even) .record_name {
+	color: red;
+}
+
+.record {
+	border: none;
+}
+
+.record p {
+	border: none;
+}
+
+.record p span {
+	float: none;
+}
+
+.record_date {
+	float: right !important;
+}
+
+.record_cont {
+	text-indent: 2em;
+}
+
+.record_listDiv {
+	padding: 0.06666666rem;
+	margin: 0.06666666rem;
+	border-bottom: 0.02666666rem solid #e1e1e1;
+}
+
+.record_listDiv:last-child {
+	border: none;
+	text-align: center;
+	color: #66ad66;
+}
+.record_listDiv:last-child span.tiops{
+	font-size: 0.21333333rem !important;
+}
+.record_listDiv p:last-child {
+	padding: 0;
+}
+
+
+.problemImg {
+	width: 100%;
+	height: 100%;
+}
+
+.problemImg ul {
+	height: 100%;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: baseline;
+	flex-flow: row wrap;
+}
+
+.problemImg ul li {
+	width: 1.33333333rem;
+	height: 1.33333333rem;
+	text-align: center;
+	background: #FFFFFF;
+	margin: 0.05333333rem 0.064rem;
+	position: relative;
+	border: 0.01333333rem solid #e1e1e1;
+	border-radius: 0.13333333rem;
+	overflow: hidden;
+}
+
+.problemImg ul li img {
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.problemImg ul li:first-child {
+	line-height: 1.33333333rem;
+	background: #FFFFFF;
+	font-size: 0.24rem;
+}
+
+.problemImg ul li:first-child span {
+	position: initial;
+	background: #FFFFFF;
+	color: #000000;
+	font-size: 0.42666666rem;
+}
+
+.problemImg ul li span {
+	position: absolute;
+	right: 0.02666666rem;
+	top: 0.02666666rem;
+	color: #FFFFFF;
+	opacity: .6;
+	background: #000000;
+	padding: 0.02666666rem;
+	font-size: 0.21333333rem;
+}
+
+.soundRecordiv {
+	height: 0.4rem;
+	line-height: 0.4rem;
+	position: relative;
+}
+.soundRecordiv .BIMdeleteluyin{
+	position: absolute;
+	right: -0.05rem;
+	top: -0.05rem;
+	color: red;
+	display: none;
+}
+.soundRecordiv .BIMhuatong{
+	display: none;
+	line-height: 2!important;
+	margin-right: 0.13333333rem;
+	color: #01529f;
+}
+
+.send {
+	color: #FFFFFF;
+	right: 0;
+	position: relative;
+	width: 3.33333333rem;
+	height: 0.34666666rem;
+	background: #01529f;
+	border-radius: 0.06666666rem;
+	display: flex;
+	align-items: center;
+	border: #01529f 0.02666666rem solid;
+}
+
+.send .arrow {
+	position: relative;
+	background: #01529f;
+	width: 0.13333333rem;
+	height: 0.13333333rem;
+	left: -0.06666666rem;
+	font-size: 0;
+	border-bottom: #01529f solid 0.01333333rem;
+	border-left: #01529f solid 0.01333333rem;
+	box-sizing: border-box;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+.BIMyuyin {
+	color: #FFFFFF;
+	margin-right: 0.13333333rem;
+}
+
+
+
+
+/* 上传 */
+.BIMguanbi {
+	display: none;
+}
+
+.state {
+	width: 100%;
+	height: 0.26666666rem;
+	text-align: center;
+	line-height: 0.26666666rem;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: #212020;
+	color: #FFFFFF;
+}
+
+.progress {
+	width: 100%;
+	height: 0.26666666rem;
+	text-align: center;
+	line-height: 0.26666666rem;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: #212020;
+	color: #FFFFFF;
+}

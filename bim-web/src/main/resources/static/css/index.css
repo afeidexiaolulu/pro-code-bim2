@@ -1,0 +1,150 @@
+*{
+    touch-action:none;
+}
+.layui-fluid{
+    display: none;
+}
+.layui-header .layui-nav-item{
+    margin-left: 30px;
+}
+.ENTRYNAME{
+    line-height: 60px;
+    color: #FFFFFF;
+}
+.layui-layout-left .layui-form-label{
+    width: 100px;
+    padding: 0;
+    line-height: 38px;
+}
+.layui-layout-left .layui-form{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.layui-side{
+    background: #005290;
+    background-image: url('../img/shadow.png');
+    background-size: 100% 100%;
+}
+.layui-side-scroll{
+    width: inherit;
+}
+.layui-side-scroll ul li{
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.iconfont:hover{
+    cursor: pointer;
+}
+.layui-side-scroll ul li:first-child em.icon_index{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+div.icon{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    position: relative;
+}
+em.icon_index{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    background: url('../img/icon_index.png')
+}
+.layui-side-scroll ul li:nth-child(2) em.icon_index{
+    background-position-x: -50px;
+}
+.layui-side-scroll ul li:nth-child(3) em.icon_index{
+    background-position-x: -100px;
+}
+.layui-side-scroll ul li:nth-child(4) em.icon_index{
+    background-position-x: -150px;
+}
+.layui-side-scroll ul li:nth-child(5) em.icon_index{
+    background-position-x: -205px;
+}
+.layui-side-scroll ul li:nth-child(6) em.icon_index{
+    background-position-x: -260px;
+}
+.layui-side-scroll ul li:nth-child(7) em.icon_index{
+    background-position-x: -310px;
+}
+.layui-form-danger+.layui-form-select .layui-input, .layui-form-danger:focus,.layui-input:hover, .layui-textarea:hover,.layui-input:focus, .layui-textarea:focus{
+    border-color: #e6e6e6 !important;
+}
+.layui-table-header .layui-table[lay-skin=line] th{
+    border-width: thin;
+}
+.layui-table-header .layui-table[lay-skin=line] th:hover{
+    background-color: #c6e5ff;
+    cursor: pointer;
+ }
+
+p.item{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+.layui-Select{
+    background: #0777cc;
+}
+.layadmin-iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #f4f6f8;
+}
+.layui-layout-admin .layui-logo{
+    background: #005290;
+    background-image: url('../img/title.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100px;
+}
+.layui-layer-iframe iframe{
+    background: #f4f6f8;
+}
+.layui-layout-admin .layui-footer{
+    background: #f4f6f8;
+    z-index: 999;
+    border-top: 1px solid #333333;
+}
+.layui-layout-admin .layui-header{
+    background-color: #FFFFFF;
+    border-bottom: 1px solid;
+    z-index: 999;
+}
+.layui-nav .layui-nav-item a{
+    color: #333333 !important;
+}
+.modify{
+    outline: -webkit-focus-ring-color auto 1px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 1px;
+    padding: 0px 50px 0px 1px;
+}
+
+.layui-btn-darkblue{
+    background-color:#0e73c1;
+}
+.layui-btn-primary:hover{
+    border-color: #0e73c1;;
+}
+.layui-btn-disabled, .layui-btn-disabled:active, .layui-btn-disabled:hover{
+    background-color:inherit;
+}
+.layui-form-select dl dd.layui-this{
+    background-color:#0e73c1;
+}
+.layui-form-onswitch {
+    border-color: #0e73c1;
+    background-color: #0e73c1;
+}

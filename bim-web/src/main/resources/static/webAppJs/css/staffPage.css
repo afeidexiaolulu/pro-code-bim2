@@ -1,0 +1,238 @@
+.staff_list_content {
+	background: #FFFFFF;
+	margin: 0.13333333rem 0;
+}
+
+.staffSearch {
+	padding: 0.13333333rem 0.13333333rem;
+	width: 4.73333333rem;
+	-webkit-touch-callout: none;
+	position: absolute;
+	background-color: #e7e7e7;
+	z-index: 100;
+}
+
+.form_title {
+	margin: 0.64rem 0.13333333rem 0;
+}
+
+.staffSearch input {
+	width: 90%;
+	height: 0.37333333rem;
+	font-size: 0.18666666rem;
+	display: inline-block;
+}
+
+.staffSearch span.BIMxinzeng,
+.staffSearch span.BIMpaixu {
+	width: 10%;
+	text-align: center;
+	font-size: 0.21333333rem;
+	display: inline-block;
+	color: #333333;
+}
+
+.staffSearch span.BIMxinzeng{
+	display: none;
+}
+
+.staff_list,
+.Person_list,
+.Person_detail {
+	position: relative;
+}
+
+.staff_left,
+.Person_detail_left {
+	width: 0.8rem;
+	height: 0.8rem;
+	padding: 0.13333333rem;
+	display: inline-block;
+}
+
+.staff_left img,
+.Person_detail_left img {
+	width: 100%;
+	height: 100%;
+}
+
+.staff_content,
+.Person_detail_right {
+	width: 3.53333333rem;
+	height: 0.93333333rem;
+	margin-right: 0.13333333rem;
+	border-bottom: 0.01333333rem solid #e7e7e7;
+	position: absolute;
+	right: 0;
+	top: 0.13333333rem;
+}
+
+.staff_top,
+.staff_bot {
+	font-size: 0.17333333rem;
+}
+
+
+.staff_bot {
+	width: 3.2rem;
+	margin-top: 0.1rem;
+	text-align: left;
+	color: #383838;
+}
+
+.More {
+	color: #01529f;
+	position: absolute;
+	top: 0.25rem;
+	right: 0;
+}
+
+.More .BIM-iconfont {
+	font-size: 0.32rem;
+}
+
+.staff_phone {
+	width: 1.13333333rem;
+	text-align: left;
+	display: inline-block;
+}
+
+.staff_grade {
+	width: 0.94666666rem;
+	text-align: left;
+}
+
+.Person_right span {
+	display: inline-flex;
+	font-size: 0.17333333rem;
+}
+.Person_right span:first-child{
+	width: 1rem;
+	text-align: left;
+}
+
+.staff_Subordinate {
+	width: 1.10666666rem;
+	line-height: 0.9;
+	color: #01529f;
+}
+
+.staff_explicit {
+	float: left;
+	margin-top: 0.10666666rem;
+}
+
+.staff_name,
+.StaffName {
+	width: 3.1rem;
+	font-weight: 600;
+	font-size: 0.2rem;
+}
+
+.layui-project-btn {
+	display: none;
+	width: 2rem;
+	background: #FFFFFF;
+	position: absolute;
+	right: 0;
+	top: 0.66666666rem;
+	z-index: 1;
+	border-radius: 0.13333333rem;
+	box-shadow: rgb(0, 0, 0) 0px 0px 0.13333333rem;
+}
+
+ul.layui-table-view {
+	border: none;
+}
+
+ul.layui-table-view li {
+	font-size: 0.18666666rem;
+	padding: 0.06666666rem 10%;
+}
+
+
+
+
+/* 增加成员 */
+
+.addPersonCancel {
+	width: 10%;
+	text-align: center;
+	display: inline-block;
+}
+
+.Person_left {
+	width: 0.5rem;
+	height: 0.5rem;
+	padding: 0.13333333rem;
+	display: inline-block;
+}
+
+.Person_right {
+	display: inline-block;
+	border-bottom: 0.01333333rem solid #e7e7e7;
+	width: 3.8rem;
+	padding-bottom: 0.26666666rem;
+}
+
+.Person_left img {
+	width: 100%;
+	height: 100%;
+}
+
+.Person_detailDiv {
+	width: 4.73333333rem;
+	/* height: calc(100% - 0.3rem); */
+	background: #FFFFFF;
+	display: none;
+	position: absolute;
+}
+.Person_detail_right_content{
+	margin-top: 0.10666666rem;
+}
+.Person_detail_right_content div:last-child{
+	margin-top: 0.1rem;
+}
+.Person_detail_right_content div:last-child span:last-child{
+	float: right;
+}
+.Person_detailDiv .layui-form-item{
+	text-align: center;
+    margin: 0.2rem 0;
+}
+.Person_form_title{
+	margin: 0.13333333rem;
+}
+.Person_detail_right{
+	border: none;
+}
+.layui-btn {
+    padding: 0 0.8rem;
+}
+
+/* //弹窗 */
+.layui-form-pane .layui-input-block{
+	margin-left: 0 !important;
+}
+.layui-form-pane .layui-unselect{
+	display: block !important;
+}
+.layui-form-pane .layui-unselect i{
+	float: right;
+}
+.layui-form-pane .layui-unselect div{
+	float: left;
+}
+.titlep{
+	position: absolute;
+    top: 15px;
+	left: 15px;
+	color: #01529f;
+}
+
+
+/* 修改角色 */
+.layui-form-item{
+	text-align: center;
+    margin: 0.2rem 0;
+}

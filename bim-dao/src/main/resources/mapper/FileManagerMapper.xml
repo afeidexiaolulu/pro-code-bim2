@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.FileManagerMapper">
+    <select id="checkFileMd5" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+          ID
+        FROM
+          T_FILE_ATTACHMENT
+        WHERE
+            file_md5 = #{fileMd5}
+        LIMIT 1
+    </select>
+
+    <select id="getFilePathById" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+          file_path
+        FROM
+          T_FILE_ATTACHMENT
+        WHERE
+            ID = #{fileId}
+    </select>
+
+    <select id="getFileNameById" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT
+          file_name
+        FROM
+          T_FILE_ATTACHMENT
+        WHERE
+            ID = #{fileId}
+    </select>
+
+    <delete id="deleteFileAttachmentById" parameterType="java.lang.String">
+        DELETE FROM T_FILE_ATTACHMENT WHERE id = #{modelImg}
+    </delete>
+
+</mapper>

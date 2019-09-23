@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.ModelShareMapper">
+    <select id="queryModelShareStatuAndEndSharingTime" parameterType="java.lang.Integer" resultType="map">
+      SELECT
+            end_sharing_time,
+            share_statu
+        FROM
+            t_model_share
+        WHERE
+            id = #{modelShareId}
+    </select>
+
+    <update id="modelShareStatuChange" parameterType="map">
+      UPDATE t_model_share
+        SET share_statu = #{shareStatu}
+      WHERE
+        id = #{modelShareId}
+    </update>
+
+    <update id="modelEndShareTimeChange" parameterType="map">
+      UPDATE t_model_share
+        SET share_statu = #{shareStatu},share_day = #{shareDay},end_sharing_time = #{endSharingTime},start_sharing_time = #{startSharingTime},update_person = #{updatePerson},update_time = #{updateTime}
+      WHERE
+        id = #{modelShareId}
+    </update>
+
+    <update id="closeShareStatu" parameterType="map">
+      UPDATE t_model_share
+        SET share_statu = 'false'
+      WHERE
+        end_sharing_time &lt; NOW()
+        AND share_statu = 'true'
+    </update>
+
+    <select id="checkModelShareRepetition" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+        COUNT(*)
+      FROM
+        t_model_share
+      WHERE
+        parent_id = #{parentId}
+        AND model_id = #{modelId}
+    </select>
+
+    <select id="queryCreatePersonById" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        create_person
+      FROM
+        t_model_share
+      WHERE
+        id = #{modelShareId}
+    </select>
+
+    <select id="queryModelShareNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        model_name
+      FROM
+        t_model_share
+      WHERE
+        id = #{id}
+    </select>
+
+    <select id="queryModelIdNameById" parameterType="java.lang.String" resultType="java.lang.String">
+      SELECT
+        model_id
+      FROM
+        t_model_share
+      WHERE
+        id = #{modelShareId}
+    </select>
+
+    <select id="checkShareStatu" parameterType="java.lang.String" resultType="java.lang.String">
+      SELECT
+        share_statu
+      FROM
+        t_model_share
+      WHERE
+        id = #{modelShareId}
+    </select>
+
+    <delete id="deleteBatchByModelId" parameterType="list">
+        delete from t_model_share where model_id in
+        <foreach item="modelId" collection="list" open="(" separator="," close=")">
+            #{modelId}
+        </foreach>
+    </delete>
+
+    <select id="queryProjectNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        project_name
+      FROM
+        t_project
+      WHERE
+        id = #{parentId}
+    </select>
+
+</mapper>

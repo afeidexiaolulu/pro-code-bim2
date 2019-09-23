@@ -1,0 +1,178 @@
+body {
+    background: #f4f6f8;
+}
+.cmdlist-text img {
+    width: 100%;
+
+}
+.layui-fluid {
+    padding: 30px;
+}
+
+.cmdlist-container {
+    background: #fff;
+    border: 1px solid transparent;
+    padding: 20px;
+}
+
+.cmdlist-container img {
+    width:100%;
+}
+
+.cmdlist-text {
+    padding: 20px 0 0;
+    height: 260px !important;
+    overflow-y: auto;
+    display: inline-block;
+}
+.cmdlist-text .price {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.cmdlist-text .price:last-child .projectDescription{
+    max-height: 150px;
+    overflow-y: auto;
+}
+.cmdlist-text .price:last-child p {
+    line-height: 1.6;
+}
+
+.cmdlist-text .price p {
+    /* display: inline-block; */
+}
+
+.cmdlist-text .flow {
+    text-align: right;
+    float: right;
+}
+#hold{
+    display: none;
+}
+.btnClass{
+    float: right;
+}
+.layui-title-button p {
+    font-size: 32px;
+    color: #2e85c1;
+    display: inline-block;
+}
+.layui-title-button p.projectName:hover{
+     cursor: auto;
+}
+.layui-title-button p:hover{
+    cursor: pointer;
+}
+.Drawing div {
+    position: relative;
+}
+
+#Drawing ,#Model{
+    margin-top: 7.5px;
+}
+.add span.icon-xinjian{
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+    line-height: inherit;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.em {
+    color: #333333;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    background: #FFFFFF;
+    opacity: .8;
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.ProjectMembers div.cmdlist-container div.half {
+    display: inline-block;
+}
+.ProjectMembers div.cmdlist-container div.half:first-child{
+    width: 35%;
+}
+.ProjectMembers div.cmdlist-container div.half:last-child{
+    width: 58%;
+    padding-left: 6%;
+}
+.half:first-child .table-text-height{
+    border-right: 5px solid #f4f6f8;
+}
+.layui-table td,
+.layui-table th,
+.layui-table-col-set,
+.layui-table-fixed-r,
+.layui-table-grid-down,
+.layui-table-header,
+.layui-table-page,
+.layui-table-tips-main,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-view,
+.layui-table[lay-skin=line],
+.layui-table[lay-skin=row] {
+    border-color: #FFFFFF;
+}
+.layui-table tbody tr:hover,
+.layui-table thead tr,
+.layui-table-click,
+.layui-table-header,
+.layui-table-hover,
+.layui-table-mend,
+.layui-table-patch,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-total tr,
+.layui-table[lay-even] tr:nth-child(even) {
+    background-color: #FFFFFF;
+}
+.layui-table tr th{
+    color: #333333;
+    font-weight: 600;
+    font-size: 18px;
+}
+.layui-table tr td{
+    color: #333333;
+    font-size: 18px;
+}
+.layui-table td, .layui-table th{
+    padding-left: 0;
+}
+.ProjectMembers:last-child,.ListQuestions:last-child{
+    height: 220px;
+    overflow: hidden;
+}
+.Tipsclass {
+    width: 220px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: none;
+    color: #333333;
+}
+
+#ListQuestionsTbody span.icon-jinggaotianchong{
+    font-size: 24px;
+}
+[contenteditable]:focus{
+    outline: none;
+    border: none;
+}
+[contenteditable]{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #333333;
+}

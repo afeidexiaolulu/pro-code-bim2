@@ -1,0 +1,372 @@
+body {
+	background: #e7e7e7;
+}
+
+.question_list_content {
+	background: #FFFFFF;
+	margin: 0.13333333rem 0;
+}
+
+.questionSearch {
+	padding: 0.13333333rem 0.13333333rem;
+	width: 4.73333333rem;
+	-webkit-touch-callout: none;
+	position: absolute;
+	background-color: #e7e7e7;
+	z-index: 100;
+}
+
+.form_title {
+	margin: 0.64rem 0.13333333rem 0;
+}
+
+.questionSearch input {
+	width: 90%;
+	height: 0.37333333rem;
+	font-size: 0.18666666rem;
+	display: inline-block;
+}
+
+.questionSearch span.BIMxinzeng,
+.questionSearch span.BIMpaixu {
+	width: 10%;
+	text-align: center;
+	font-size: 0.21333333rem;
+	display: inline-block;
+	color: #333333;
+}
+
+.questionSearch span.BIMxinzeng{
+	display: none;
+}
+
+.question_list {
+	position: relative;
+}
+
+.question_left {
+	width: 0.8rem;
+	height: 0.8rem;
+	padding: 0.13333333rem;
+	display: inline-block;
+}
+
+.question_left img {
+	width: 100%;
+	height: 100%;
+}
+
+.question_content {
+	width: 3.53333333rem;
+	height: 0.93333333rem;
+	margin-right: 0.13333333rem;
+	border-bottom: 0.01333333rem solid #e7e7e7;
+	position: absolute;
+	right: 0;
+	top: 0.13333333rem;
+}
+
+.question_top,
+.question_bot {
+	font-size: 0.17333333rem;
+}
+
+.question_bot .BIM-iconfont {
+	font-size: 0.18666666rem;
+	margin-right: 0.06666666rem;
+}
+
+.question_bot {
+	width: 3.2rem;
+	margin-top: 0.1rem;
+	text-align: center;
+	color: #383838;
+}
+
+.More {
+	color: #01529f;
+	position: absolute;
+	top: 0.25rem;
+	right: 0;
+}
+
+.question_time {
+	float: left;
+}
+
+.question_grade {
+	width: 0.94666666rem;
+	text-align: left;
+}
+
+.questionPage span {
+	display: inline-block;
+}
+
+.question_Subordinate {
+	width: 1rem;
+	text-align: right;
+	float: right;
+}
+
+.question_explicit {
+	float: left;
+	margin-top: 0.10666666rem;
+}
+
+.question_name {
+	width: 3.1rem;
+	font-weight: 600;
+	font-size: 0.2rem;
+}
+
+.layui-project-btn {
+	display: none;
+	width: 2rem;
+	background: #FFFFFF;
+	position: absolute;
+	right: 0;
+	top: 0.66666666rem;
+	z-index: 1;
+	border-radius: 0.13333333rem;
+	box-shadow: rgb(0, 0, 0) 0px 0px 0.06666666rem;
+}
+
+ul.layui-table-view {
+	border: none;
+}
+
+ul.layui-table-view li {
+	font-size: 0.18666666rem;
+	padding: 0.06666666rem 10%;
+	color: #383838;
+}
+ul.layui-table-view hr {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+    background-color: #383838;
+}
+
+/* 增加问题 */
+.addQuestion {
+	margin: 0.13333333rem;
+}
+
+.addQuestion input,
+.addQuestion textarea,
+.addQuestion div {
+	/* margin-top: 0.13333333rem; */
+}
+
+.addQuestion .layui-form-item {
+	text-align: center;
+	margin: 0.13333333rem 0;
+}
+
+.addQuestion .layui-btn {
+	padding: 0 0.8rem;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: #797878;
+}
+
+.addQuestion p {
+	height: 0.50666666rem;
+	line-height: 3;
+	background-color: #fff;
+	border: 1px solid #efeff4;
+	padding-left: 0.13333333rem;
+}
+
+.problemImg {
+	width: 100%;
+	height: 100%;
+}
+
+.problemImg ul {
+	height: 100%;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: baseline;
+	flex-flow: row wrap;
+}
+
+.problemImg ul li:first-child {
+	line-height: 1.33333333rem;
+	background: #FFFFFF;
+	font-size: 0.24rem;
+}
+
+.problemImg ul li {
+	width: 1.33333333rem;
+	height: 1.33333333rem;
+	text-align: center;
+	background: #FFFFFF;
+	margin: 0.05333333rem;
+	position: relative;
+	border: 0.01333333rem solid #e1e1e1;
+	border-radius: 0.13333333rem;
+	overflow: hidden;
+}
+
+.problemImg ul li:first-child span {
+	position: initial;
+	background: #FFFFFF;
+	color: #000000;
+	font-size: 0.42666666rem;
+}
+
+.problemImg ul li span {
+	position: absolute;
+	right: 0.02666666rem;
+	top: 0.02666666rem;
+	color: #FFFFFF;
+	opacity: .6;
+	background: #000000;
+	padding: 0.02666666rem;
+	font-size: 0.21333333rem;
+}
+
+.problemImg ul li img {
+	width: 100%;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.BIMguanbi {
+	display: none;
+}
+
+.picture {
+	background: #FFFFFF;
+	padding: 0.16rem;
+}
+
+.ImportantLevel ,Send{
+	position: relative;
+}
+
+.ImportantLevel .BIM-iconfont, .Send .BIM-iconfont{
+	font-size: 0.21333333rem;
+}
+
+.ImportantLevel span:last-child, .Send span:last-child{
+	float: right;
+	line-height: 2;
+	margin-left: 0.13333333rem;
+}
+
+.iosselect, .currentStaff{
+	width: 4.73333333rem;
+	background: #FFFF;
+	position: absolute;
+	box-shadow: 0px 0.02666666rem 0.02666666rem #000000;
+	z-index: 999;
+	display: none;
+	opacity: 1;
+}
+
+.iosselect ul, .currentStaff ul{
+	padding: 0.13333333rem;
+}
+
+.iosselect ul li, .currentStaff ul li{
+	padding: 0.06666666rem 0;
+	border-bottom: 1px solid #E1E1E1;
+}
+
+.iosselect ul li:last-child, .currentStaff ul li:last-child{
+	border: none;
+}
+
+.grade, .sending {
+	margin: 0 0.2rem;
+}
+
+.questDetail .iosselect {
+	width: 4.73333333rem;
+	background: #FFFF;
+	position: absolute;
+	box-shadow: 0px 0.02666666rem 0.02666666rem #000000;
+	z-index: 999;
+	display: none;
+	opacity: 1;
+	left: 10.13333333rem;
+}
+
+
+.question_rename p{
+	text-align: left;
+}
+.question_rename p:first-child {
+    color: #01529f;
+}
+
+
+
+
+.soundRecordiv {
+	height: 0.4rem;
+	line-height: 0.4rem;
+	position: relative;
+}
+.soundRecordiv .BIMdeleteluyin{
+	position: absolute;
+	right: -0.05rem;
+	top: -0.05rem;
+	color: red;
+	display: none;
+}
+.addQuestion .soundRecordiv .BIMhuatong{
+	display: inline-block;
+	line-height: 1.5 !important;
+	margin-right: 0.13333333rem;
+	color: #01529f;
+}
+
+.addQuestion .send {
+	color: #FFFFFF;
+	right: 0;
+	position: relative;
+	width: 3.33333333rem;
+	height: 0.34666666rem;
+	background: #01529f;
+	border-radius: 0.06666666rem;
+	display: none;
+	align-items: center;
+	border: #01529f 0.02666666rem solid;
+	position: absolute;
+	top: 0.05333333rem;
+	right: 0.13333333rem;
+}
+
+.send .arrow {
+	position: relative;
+	background: #01529f;
+	width: 0.13333333rem;
+	height: 0.13333333rem;
+	left: -0.06666666rem;
+	font-size: 0;
+	border-bottom: #01529f solid 0.01333333rem;
+	border-left: #01529f solid 0.01333333rem;
+	box-sizing: border-box;
+	transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+
+.BIMyuyin {
+	color: #FFFFFF;
+	margin-right: 0.13333333rem;
+}
+.addQuestion .soundRecordiv span {
+	float: right;
+	/*display: none;*/
+}

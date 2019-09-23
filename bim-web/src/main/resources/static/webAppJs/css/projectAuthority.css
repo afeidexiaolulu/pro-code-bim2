@@ -1,0 +1,190 @@
+body div.layui-content:first-child {
+	display: table;
+	width: 100%;
+	height: 0.66666666rem;
+	padding: 0;
+	table-layout: fixed;
+	border-top: 0;
+	border-bottom: 0;
+	-webkit-touch-callout: none;
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	left: 0;
+}
+
+hr {
+	box-shadow: 0px 0.02666666rem 0.02666666rem #000000; /*下边阴影*/
+}
+.layui-table-view hr{
+	background-color: #383838;
+	box-shadow: inherit;
+}
+
+.layui-search input[type=search] {
+	padding: 0;
+}
+
+.layui-projectList {
+	background-color: #FFFFFF;
+	border-radius: 0.13333333rem;
+	margin: 0.13333333rem auto;
+	padding: 0.13333333rem;
+}
+
+.layui-projectImg,
+.layui-projectDetail {
+	width: 50%;
+	float: left;
+	overflow: hidden;
+	max-height: 1.3944rem;
+}
+
+.layui-projectImg {
+	border-radius: 0.13333333rem;
+}
+
+.layui-projectImg img {
+	width: 100%;
+	height: 100%;
+	border-radius: 0.13333333rem;
+}
+
+.layui-projectDetail p {
+	font-size: 0.16rem;
+	padding-left: 0.13333333rem;
+	margin: 0;
+	line-height: 1.7;
+}
+
+.layui-projectDetail .layui_project_name {
+	margin-top: 0.16rem;
+	font-size: 0.24rem;
+	font-weight: 600;
+	color: #01529f;
+}
+
+.project_NAME {
+	width: 1.73333333rem;
+	float: left;
+}
+.BIMjiantouxia {
+	font-size: 0.24rem;
+}
+
+.layui-projectDetail .layui_project_name span:last-child {
+	font-size: 0.16rem;
+	float: right;
+	line-height: 0.4rem;
+}
+
+.layui-projectDetail .layui_projext_datePlace span:last-child {
+	width: 1.2rem;
+	text-align: right;
+	float: right;
+}
+
+div#layui-projectList {
+	margin: 0.8rem 0.13333333rem 0.8rem;
+}
+
+div.layui-projectList div.layui-roject-List {
+	position: relative;
+}
+
+.layui-project-btn {
+	display: none;
+	width: 2rem;
+	background: #FFFFFF;
+	position: absolute;
+	right: -0.13333333rem;
+	top: 0.3333rem;
+	z-index: 1;
+	border-radius: 0.13333333rem;
+	box-shadow: rgb(0, 0, 0) 0px 0px 0.06666666rem;
+}
+
+.layui-table-view {
+	border: none;
+}
+
+ul.layui-table-view li {
+	font-size: 0.18666666rem;
+	padding: 0.06666666rem 10%;
+	color: #383838;
+}
+
+ul.layui-table-view hr {
+	width: 80%;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.layui-backdrop {
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, .3);
+}
+
+input::-ms-input-placeholder {
+	text-align: center;
+}
+
+input::-webkit-input-placeholder {
+	text-align: center;
+}
+
+.form_title span {
+	width: 10%;
+	text-align: center;
+	display: inline-block;
+	color: #333333;
+}
+
+.form_title {
+	padding: 0.13333333rem 0.13333333rem 0;
+	top: 0;
+	width: 4.73333333rem;
+	-webkit-touch-callout: none;
+	position: fixed;
+	background-color: #efeff4;
+	z-index: 10;
+}
+
+.form_title input {
+	width: 80%;
+	height: 0.37333333rem;
+	font-size: 0.18666666rem;
+	display: inline-block;
+}
+.project_NAME{
+	font-size: 0.20rem;
+}
+
+/* 弹窗 */
+.layui-m-layerDiv p {
+	color: #000000;
+	text-align: left;
+	margin-bottom: 0.13333333rem;
+}
+
+.layui-m-layerDiv p:first-child {
+	color: #01529f;
+}
+
+.layui-m-layerDiv input[type='text'] {
+	height: auto;
+	display: inline-block;
+	margin: 0;
+	padding: 0.06666666rem 0.13333333rem;
+	width: 60%;
+}
+
+.layui-m-layerDiv p.layui-input-row {
+	line-height: 0.44rem;
+}

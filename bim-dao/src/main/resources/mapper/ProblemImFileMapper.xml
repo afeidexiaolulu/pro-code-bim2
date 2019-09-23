@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.ProblemImgFileMapper">
+
+    <resultMap id="ImgMap" type="com.zy.bim.bean.ProblemImgFile">
+        <id column="id" property="id"/>
+        <!-- 定义普通属性 -->
+        <result property="img" column="file_path" />
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <!--问题创建上传-->
+    <insert id="createProbleImg"  >
+        insert into t_file_attachment(problem_id,file_path,create_time,create_by,store_type,ext)
+        values
+        <foreach collection="list"  item="tag" separator="," index="index">
+        (#{id},#{tag.img},#{tag.createTime},#{tag.creteBy},#{tag.storeType},#{tag.ext})
+        </foreach>
+    </insert>
+
+
+    <!--根据问题查询图片-->
+    <select id="findImgOne" parameterType="int" resultMap="ImgMap">
+        select id,file_path,create_time from t_file_attachment where problem_id=#{id}
+    </select>
+
+    <!--根据问题查询图片-->
+    <select id="findImgOneImg" parameterType="String" resultType="string">
+        select file_path from t_file_attachment where id=#{id}
+    </select>
+</mapper>

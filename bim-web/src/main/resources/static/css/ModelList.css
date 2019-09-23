@@ -1,0 +1,120 @@
+.layui-fluid {
+    padding:30px;
+}
+.iconfont {
+    color: #0e73c1;
+    margin: 0 5px;
+}
+.demoReloadTitle .iconfont{
+    line-height: 2.1;
+}
+.icon-xinjian{
+    color: #FFFFFF;
+}
+.iconfont:hover{
+    cursor: pointer;
+}
+.layui-form-checked[lay-skin=primary] i{
+    border-color: #2a82e3 !important;
+    background-color: #2a82e3 !important;
+    color: #fff;
+}
+
+.layui-form-checkbox[lay-skin=primary] i{
+    background-color: #c6e5ff;
+}
+.demoReloadTitle{
+    padding: 10px 15px;
+    background: #c6e5ff;
+    border-radius: 5px;
+}
+.div_search{
+    width: 30%;
+    float: right;
+    position: relative;
+}
+.icon-sousuo{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+.layui-table-page{
+    text-align: right;
+    padding: 7px 7px;
+}
+.layui-table-page .layui-laypage a, .layui-table-page .layui-laypage span.layui-laypage-curr{
+    margin: 0 12px;
+}
+
+.demoReloadTitle  .layui-disabled, .demoReloadTitle .layui-disabled:active {
+    background-color: initial!important;
+    color: #000!important;
+}
+
+
+
+/* 问题清单 */ 
+
+
+    /* 分页 全局 */
+.layui-laypage-count,.layui-laypage-limits,.layui-laypage-skip{
+    margin-bottom: 0 !important;
+}
+.layui-laypage-limits{
+    margin-right: 0 !important;
+}
+.layui-laypage-count{
+    margin-right: 20px !important;
+}
+.layui-laypage-limits select{
+    height: 100%;
+    line-height: 100%;
+}
+.layui-table-page .layui-disabled, .layui-table-page .layui-disabled:hover{
+    color: #1E9FFF !important;
+}
+.layui-table span.icon-jinggaotianchong{
+    font-size: 22px;
+}
+.layui-layer-btn{
+    text-align: center !important;
+}
+
+
+/* 人员 */
+.Drop_Down{
+    display: inline-block;
+}
+.Drop_Down .layui-form-item{
+    margin: 0 !important;
+}
+
+/* 分享 */
+.label_one{
+    width: 30%;
+    font-weight: 600;
+}
+.label_two{
+   display: inline-block
+}
+p.p_title{
+    color: #0762a8;
+}
+span.icon-chenggong{
+    color: #43d07c !important;
+}
+input[name='urlist']{
+    position: absolute;
+    top: 0;
+    border:none;
+    background:transparent;
+    color: transparent;
+}
+input[name='urlist']::selection {
+    background:transparent;
+    color: transparent;
+}
+input[name='urlist']::-moz-selection {
+    background:transparent;
+    color: transparent;
+}

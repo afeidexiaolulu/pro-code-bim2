@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/newBuild.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/webuploader.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/webuploader.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <script src="../../static/js/addProjectHome.js"></script>
+</head>
+
+<body>
+
+    <div class="layui-contain">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ProjectName"  lay-verify="ProjectName" placeholder="请输入项目名称"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目地点：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ProjectSite"  lay-verify="ProjectSite" placeholder="请输入项目地点"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目经理：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="ProjectManager"  lay-verify="ProjectManager" placeholder="请搜索选择项目经理"
+                        autocomplete="off" class="layui-input">
+                    <select name="ProjectManager">
+
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目简介：</label>
+                <div class="layui-input-block">
+                    <textarea name="ProjectProfile"  lay-verify="ProjectProfile" placeholder="请输入项目简介"
+                        class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">上传图片：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fileImg" lay-verify="fileImg" placeholder="请上传图片" class="layui-input fileImg" readonly>
+                    <button class="layui-btn layui-btn-darkblue" type="button" id="add">上传</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <button type="button" class="layui-btn layui-btn-darkblue" lay-submit id="yes">确定</button>
+                <button type="button" class="layui-btn layui-btn-primary" data-type="close">取消</button>
+            </div>
+        </form>
+    </div>
+    <script src="../../static/layui/layui.js"></script>
+</body>
+
+</html>

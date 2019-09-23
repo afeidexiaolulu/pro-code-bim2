@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<title>BIM轻量化图形平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../webAppJs/css/layui.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/file_icon.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/addQuestion.css">
+    <link rel="stylesheet" href="http://zhoushengfe.com/iosselect/src/iosSelect.css">
+    <script src="../../../webAppJs/js/jquery-3.1.1.min.js"></script>
+    <script src="../../../webAppJs/js/layer_mobile/layer.js"></script>
+    <script src="../../../webAppJs/js/base.js"></script>
+</head>
+
+<body style="background-color: #e7e7e7;">
+    <div class="layui-form addQuestion" action="">
+        <input type="text" name="title" required lay-verify="required" placeholder="问题名称（不超过15个字）" autocomplete="off"
+            class="layui-input">
+        <input type="text" name="title" required lay-verify="required" placeholder="问题阶段" autocomplete="off"
+            class="layui-input">
+            <input type="hidden" name="bank_id" id="bankId" value="">
+            <span id="showBank">点击这里选择银行</span>
+        <input type="text" name="title" required lay-verify="required" placeholder="项目经理" autocomplete="off"
+            class="layui-input">
+        <textarea name="desc" placeholder="项目简介（不超过80个字）" class="layui-textarea"></textarea>
+
+        <div class="upload_project">
+            <p>上传一张图片作为项目头图</p>
+            <div class="upload">
+
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-indigo" data-type="firm">确定</button><button
+            class="layui-btn layui-btn-primary" data-type="close">取消</button>
+    </div>
+
+    <div class="container"></div>
+    <script src="http://zhoushengfe.com/iosselect/demo/one/bank.js"></script>
+    <script src="../../../webAppJs/layui/layui.js"></script>
+    <script src="http://zhoushengfe.com/iosselect/src/iosSelect.js"></script>
+    <script>
+        $(function () {
+            layui.use(['form'], function () {
+                var form = layui.form;
+
+                active = {
+                    addProject: function () {
+
+                    },
+                    firm: function () {
+
+                    },
+                    close: function () {
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }
+                }
+
+                $('.layui-form-item button').on('click', function () {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+        })
+
+
+        var showBankDom = document.querySelector('#showBank');
+        var bankIdDom = document.querySelector('#bankId');
+        showBankDom.addEventListener('click', function () {
+            var bankId = showBankDom.dataset['id'];
+            var bankName = showBankDom.dataset['value'];
+
+            var bankSelect = new IosSelect(1,
+                [data], {
+                    container: '.container',
+                    title: '银行卡选择',
+                    itemHeight: 50,
+                    itemShowCount: 3,
+                    oneLevelId: bankId,
+                    callback: function (selectOneObj) {
+                        bankIdDom.value = selectOneObj.id;
+                        showBankDom.innerHTML = selectOneObj.value;
+                        showBankDom.dataset['id'] = selectOneObj.id;
+                        showBankDom.dataset['value'] = selectOneObj.value;
+                    }
+                });
+        });
+
+    </script>
+</body>
+
+</html>

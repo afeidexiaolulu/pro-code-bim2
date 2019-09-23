@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/ModelList.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <style>.layui-fluid{display:block;padding:30px 60px;}.layui-form{height:200px;}.layui-form-item:last-child{text-align:center;}</style>
+</head>
+
+<body>
+<div class="layui-fluid layadmin-cmdlist-fluid">
+    <form action="" class="layui-form">
+        <div class="">
+            <input type="text" id="label_id" value="" hidden="hidden" />
+            <label class="layui-form-label label_one">未知</label>
+        </div>
+        <div class="layui-form-item label_two">
+            <label class="layui-form-label">有效期：</label>
+            <div class="layui-input-block">
+                <select name="DAY" lay-verify="required">
+                    <option value=""></option>
+                    <option value="3">3天</option>
+                    <option value="5">5天</option>
+                    <option value="7">7天</option>
+                    <option value="36500">永久</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="margin: 0;">
+            <button class="layui-btn layui-btn-darkblue" lay-submit lay-filter="*" data-type="yes">确定</button>
+            <button type="reset" class="layui-btn layui-btn-primary" data-type="close">取消</button>
+        </div>
+    </div>
+</div>
+
+<script src="../../static/layui/layui.js"></script>
+<script>
+    layui.use('form', function () {
+        eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('0 2=1.2;0 3=1.3;0 $=1.$;',4,4,'var|layui|form|layer'.split('|'),0,{}))
+
+        var dataList = parent.layer.methodConfig;
+        $("#label_id").val(dataList.dataId);
+        $(".label_one").html(dataList.dataName);
+        active = {
+            //创建链接
+            yes: function () {
+                if ($("select[name='DAY'] option:selected").val() == "") {
+                    layer.msg('请选择有效期', {
+                        icon: 5,
+                        anim: 6
+                    });
+                } else {
+                    $.ajax({
+                        url: getRootPath() + "/bim/modelShare/modelEndShareTimeChange",
+                        type: "post",
+                        data: {
+                            modelShareId : dataList.dataId ,// 分享列表的id
+                            shareDay:$("select[name='DAY'] option:selected").val()
+                        },
+                        beforeSend: function () {
+                            layer.load(2);
+                        },
+                        complete: function () {
+                            layer.closeAll('loading');
+                        },
+                        success: function (data_) {
+                            debugger
+                            if (data_.success == true) {
+                                if ("您不为此链接创建人,无法修改" == data_.message){
+                                    layer.msg(data_.message,function(){
+                                        close();
+                                    });
+                                }else{
+                                    layer.msg(data_.message,function(){
+                                        close();
+                                    })
+                                }
+                            } else {
+                                layer.msg(data_.message);
+                            }
+                        },
+                        error: function () {
+                            layer.msg("请求失败，请稍后再试", {
+                                icon: 5,
+                                anim: 6
+                            })
+                        }
+                    })
+                }
+
+            },
+            close: function () {
+                close();
+            }
+        }
+
+        function close() {
+            $maskof();
+            let index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        }
+
+        $('.layui-input-block button').click(function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        })
+
+    });
+
+</script>
+</body>
+
+</html>

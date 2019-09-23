@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/ModelList.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/0409.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <style>.layui-fluid{display:block;padding:30px 60px;}.layui-input-block{margin:0;}.layui-form-label{width:150px;}.layui-form-item{display:inline-block;width:400px;position:relative;}.label_name{font-weight:600;}.layui-form-item .layui-form-label{width:80px;text-align:center;background:#eeeeee;position:absolute;right:0;top:0;}.layui-form-item:last-child{width:100%;text-align:center;}</style>
+</head>
+
+<body>
+    <div class="layui-fluid layadmin-cmdlist-fluid">
+        <p class="p_title"><span class="iconfont icon-chenggong"></span>成功创建模型链接</p>
+        <div action="" class="layui-form">
+            <div class="layui-input-block rowList">
+                <label class="layui-form-label label_name layui-elip">未知</label>
+                <div class="layui-form-item">
+                    <input type="text" name="title" class="layui-input input_input" readonly="readonly">
+                    <label class="layui-form-label label_input">未知</label>
+                </div>
+                <button class="layui-btn layui-btn-darkblue" lay-submit data-type="oncut">复制链接</button>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-darkblue" lay-submit lay-filter="*" data-type="yes">一键复制</button>
+                <button type="reset" class="layui-btn layui-btn-primary" data-type="close">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+    <script>
+        layui.use('form', function () {
+            var form = layui.form;
+            var layer = layui.layer;
+            var $ = layui.$;
+
+            let dataList = parent.layer.methodConfig;
+            let f = $.base64.encode("id=" + dataList.data.id);
+            $(".label_name").html(dataList.data.modelName);
+            $(".input_input").attr("id", dataList.data.id)
+            $(".input_input").val(getRootPath() + "/bim/modelShare/modelLightWeightShare?" + f);
+            $(".label_input").html(dataList.data.shareDay == "36500" ? "\u6c38\u4e45\u6709\u6548" : "\u8fde\u7eed" + dataList.data.shareDay +
+                "\u5929\u6709\u6548");
+
+            active = {
+                oncut: function () {
+                    $(this).prev(".layui-form-item").children("input").select();
+                    document.execCommand("copy");
+                    layer.msg("复制成功", {icon:6,anim:6,time:800});
+                },
+                yes: function () {
+                    $("input").select();
+                    document.execCommand("copy");
+                    layer.msg("一键复制成功", {icon:6,anim:6,time:800});
+                },
+                close: function () {
+                    $maskof();
+                    let index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            }
+
+            $('.layui-input-block button').click(function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            })
+        });
+
+    </script>
+</body>
+
+</html>

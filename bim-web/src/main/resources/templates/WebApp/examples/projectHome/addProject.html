@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>BIM轻量化图形平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../webAppJs/css/layui.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/file_icon.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/addProject.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/index.css">
+    <link rel="stylesheet" href="../../../webAppJs/css/webuploader.css">
+    <script src="../../../webAppJs/js/jquery-3.1.1.min.js"></script>
+    <script src="../../../webAppJs/js/webuploader.js"></script>
+    <script src="../../../webAppJs/js/layer_mobile/layer.js"></script>
+    <script src="../../../webAppJs/js/base.js"></script>
+</head>
+
+<body style="background-color: #e7e7e7;margin-bottom: 0.58666666rem;">
+    <div class="layui-form addProject" action="">
+        <input type="text" name="ProjectName" required lay-verify="required" placeholder="项目名称（不超过15个字）"
+            autocomplete="off" class="layui-input" value="" maxlength="30">
+        <input type="text" name="ProjectSite" required lay-verify="required" placeholder="项目地点" autocomplete="off"
+            class="layui-input" value="">
+        <input type="text" name="ProjectManager" required lay-verify="required" placeholder="项目经理" autocomplete="off"
+            class="layui-input" value="">
+        <div class="ProjectManager">
+            <ul></ul>
+        </div>  
+        <textarea name="ProjectProfile" placeholder="项目简介（不超过80个字）" class="layui-textarea" maxlength="160"></textarea>
+
+        <div class="upload_project">
+            <p>上传一张图片作为项目头图</p>
+            <div id="uploader"><span class="BIM-iconfont BIMxinzeng add"></span></div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn layui-btn-indigo" data-type="firm">确定</button><button
+            class="layui-btn layui-btn-primary" data-type="close">取消</button>
+    </div>
+    <nav class="mui-bar mui-bar-tab">
+        <a class="mui-tab-item mui-active" href="../projectHome/index">
+            <span class="BIM-iconfont BIMxiangmuzhuye"></span>
+            <span class="mui-tab-label">项目主页</span>
+        </a>
+        <a class="mui-tab-item" href="../projectAuthority/power">
+            <span class="BIM-iconfont BIMquanxianguanli"></span>
+            <span class="mui-tab-label">权限管理</span>
+        </a>
+        <a class="mui-tab-item gerenzhuye" href="../projectIndividual/individual">
+            <span class="BIM-iconfont BIMgerenzhuye"></span>
+            <span class="mui-tab-label">个人主页</span>
+            <span class="layui-badge-dot"></span>
+        </a>
+        <a class="mui-tab-item" href="../projectServices/services">
+            <span class="BIM-iconfont BIMzengzhifuwu"></span>
+            <span class="mui-tab-label">增值服务</span>
+        </a>
+    </nav>
+    <script src="../../../webAppJs/layui/layui.js"></script>
+    <script>
+        $(function () {
+            layui.use(['form'], function () {
+                var form = layui.form;
+
+                uploaderIMG();
+
+                active = {
+                    close: function () {
+                        let index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }
+                }
+
+                //查询项目经理
+                $("input[name='ProjectManager']").bind('input propertychange', function () {
+                    val = $(this).val();
+                    $.ajax({
+                        url: getRootPath() + "/bim/project/user",
+                        type: "post",
+                        data: {
+                            userName: val
+                        },
+                        beforeSend: function () {
+                            layer.load(2);
+                        },
+                        complete: function () {
+                            layer.closeAll('loading');
+                        },
+                        success: function (res) {
+                            $(".ProjectManager ul li").remove();
+                            if (res.data != "" || res.data != null) {
+                                let str = "";
+                                $.each(res.data, function (index, item) {
+                                    str += "<li value=" + item.id +" >" + item.name + "</li>";
+                                });
+                                $(".ProjectManager ul").append(str);
+
+                                if (str != "") {
+                                    $(".ProjectManager").slideDown("100");
+                                }
+                            }
+
+                            $(".ProjectManager ul li").click(function(){
+                                $("input[name='ProjectManager']").attr("id",$(this).attr("value"));
+                                $("input[name='ProjectManager']").val($(this).html());
+                                $(".ProjectManager").slideUp("100");
+                            })
+                        },
+                        error: function () {
+                            BIM.open({
+                                content: '\u53d1\u751f\u9519\u8bef\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5',
+                                skin: 'msg',
+                                time: 2
+                            });
+                        }
+                    })
+                })
+
+                //上传
+                function uploaderIMG() {
+                    var GUID = WebUploader.Base.guid();
+                    var $list = $('#uploader');
+                    var uploader = WebUploader.create({
+                        server: getRootPath() + '/bim/project/create', //服务器地址
+                        formData: {
+                            "guid": GUID
+                        },
+                        pick: '.add', // 选择文件的按钮。可选.
+                        resize: false,
+                        duplicate: false,
+                        fileNumLimit: 1,
+                        //只允许选择图片
+                        accept: {
+                            title: 'Images',
+                            extensions: 'gif,jpg,jpeg,bmp,png',
+                            mimeTypes: 'image/*'
+                        },
+                        method: 'POST'
+                    });
+                    // 当有文件被添加进队列的时候
+                    uploader.on('fileQueued', function (file) {
+                        let $li = $(
+                                '<div id="' + file.id + '" class="screenshotIMG"><img>' +
+                                '<div class="state">等待上传</div>' +
+                                '</div>'),
+                            $img = $li.find('img');
+                        $list.append($li);
+                        // 创建缩略图
+                        // 如果为非图片文件，可以不用调用此方法。
+                        // thumbnailWidth x thumbnailHeight 为 100 x 100
+                        uploader.makeThumb(file, function (error, src) {
+                            if (error) {
+                                $img.replaceWith('<span>不能预览</span>');
+                                return;
+                            }
+                            $img.attr('src', src);
+                        }, $('#' + file.id).width(), $('#' + file.id).width() / 3);
+
+                    });
+
+                    // 文件上传过程中创建进度条实时显示。
+                    uploader.on('uploadProgress', function (file, percentage) {
+                        var $li = $('#' + file.id),
+                            $percent = $li.find('.progress .progress-bar');
+                        // 避免重复创建
+                        if (!$percent.length) {
+                            $percent = $(
+                                '<div class="progress progress-striped active percentage"></div>'
+                            ).appendTo($li).find('.progress-bar');
+                        }
+                        $li.find('div.state').html('上传中');
+                        $('#' + file.id).find(".percentage").html(parseInt(percentage * 100) +
+                            '%');
+                    });
+
+                    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                    uploader.on('uploadSuccess', function (file, response) {
+                        $('#' + file.id).find('div.state').html('已上传');
+                    });
+
+                    // 文件上传失败，显示上传出错。
+                    uploader.on('uploadError', function (file) {
+                        $('#' + file.id).find('div.state').html('上传出错');
+                    });
+
+                    // 完成上传完了，成功或者失败，先删除进度条。
+                    uploader.on('uploadComplete', function (file) {
+                        $('#' + file.id).find('div.state').fadeOut();
+                        $('#' + file.id).find('.progress').fadeOut();
+                    });
+
+                    //所有文件上传完毕
+                    uploader.on("uploadFinished", function () {
+                        $('.BIMguanbi').click(function (event) {
+                            event.stopPropagation();
+                            var type = $(this).data('type');
+                            active[type] ? active[type].call(this) : '';
+                        });
+
+                        BIM.open({
+                            content: '\u6dfb\u52a0\u6210\u529f',
+                            skin: 'msg',
+                            time: 3
+                        });
+                        setTimeout(function () {
+                            parent.layer.close(parent.layer.getFrameIndex(window.name))
+                        }, 1000)
+                    });
+
+                    $(".layui-btn-indigo").click(function () {
+                        if ($("input[name='ProjectName']").val() == "" || $(
+                                "input[name='ProjectName']").val().length > 15) {
+                            BIM.open({
+                                content: '\u8bf7\u8f93\u5165\u957f\u5ea6\u4e3a15\u4e2a\u5b57\u4ee5\u5185\u7684\u9879\u76ee\u540d\u79f0',
+                                skin: 'msg',
+                                time: 3
+                            });
+                        } else if ($("input[name='ProjectSite']").val() == "") {
+                            BIM.open({
+                                content: '\u8bf7\u8f93\u5165\u9879\u76ee\u5730\u5740',
+                                skin: 'msg',
+                                time: 3
+                            });
+                        } else if ($("textarea[name='ProjectProfile']").val() == "") {
+                            BIM.open({
+                                content: '\u8bf7\u8f93\u5165\u9879\u76ee\u7b80\u4ecb',
+                                skin: 'msg',
+                                time: 3
+                            });
+                        } else if ($("input[name='ProjectManager']").attr("id") == "") {
+                            BIM.open({
+                                content: '请选择项目经理',
+                                skin: 'msg',
+                                time: 3
+                            });
+                        } else if ($(".screenshotIMG").length == 0) {
+                            BIM.open({
+                                content: '\u8bf7\u4e0a\u4f20\u4e00\u5f20\u56fe\u7247\u4f5c\u4e3a\u9879\u76ee\u5934\u56fe',
+                                skin: 'msg',
+                                time: 3
+                            });
+                        } else {
+                            //开始上传
+                            uploader.option('formData', {
+                                projectName: $("input[name='ProjectName']").val(), //名称
+                                ProjectAddress: $("input[name='ProjectSite']").val(), //地址
+                                projectDescription: $("textarea[name='ProjectProfile']").val(), //描述
+                                project_manager: $("input[name='ProjectManager']").attr("id") //经理 id
+                            })
+                            uploader.upload();
+                        }
+                    })
+
+                }
+
+                $('.layui-form-item button,.BIMxinzeng').click(function (e) {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                });
+            });
+        })
+
+    </script>
+</body>
+
+</html>

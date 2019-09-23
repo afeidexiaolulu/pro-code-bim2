@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>JSDoc: HitInfo</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="../public_Core/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+</head>
+
+<body>
+    <div id="stickyNavbarOverlay"></div>
+    <div class="top-navbar">
+        <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    
+                    
+                        <h1 class="navbar-item">Documentation</h1>
+                    
+                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3" id="sidebarNav">
+                <div class="sidebar">
+                    <nav>
+                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="CameraData.html">CameraData</a></li><li><a href="HitInfo.html">HitInfo</a></li><li><a href="ModelOptions.html">ModelOptions</a></li><li><a href="PropertiesPanelMsg.html">PropertiesPanelMsg</a></li><li><a href="ScreenPosition.html">ScreenPosition</a></li><li><a href="SelectionData.html">SelectionData</a></li><li><a href="TouchMsg.html">TouchMsg</a></li><li><a href="WorkAreaBoxData.html">WorkAreaBoxData</a></li><li><a href="WorkAreaData.html">WorkAreaData</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Initialize_ZhiUTech_Settings">Initialize_ZhiUTech_Settings</a></li><li><a href="global.html#Initialize_ZhiUTech_TweenCtrl">Initialize_ZhiUTech_TweenCtrl</a></li><li><a href="global.html#InitializeZhiUViewer">InitializeZhiUViewer</a></li><li><a href="global.html#L_Build">L_Build</a></li><li><a href="global.html#L_CameraGoMainView">L_CameraGoMainView</a></li><li><a href="global.html#L_ClearAllColor">L_ClearAllColor</a></li><li><a href="global.html#L_ClearColorById">L_ClearColorById</a></li><li><a href="global.html#L_ClearNowSelectionColor">L_ClearNowSelectionColor</a></li><li><a href="global.html#L_ClearSelection">L_ClearSelection</a></li><li><a href="global.html#L_Finish">L_Finish</a></li><li><a href="global.html#L_FocusNowSelection">L_FocusNowSelection</a></li><li><a href="global.html#L_FocusObject">L_FocusObject</a></li><li><a href="global.html#L_GetCameraData">L_GetCameraData</a></li><li><a href="global.html#L_GetCameraModePerspective">L_GetCameraModePerspective</a></li><li><a href="global.html#L_GetNowSelectionId">L_GetNowSelectionId</a></li><li><a href="global.html#L_GetNowSelectionProperties">L_GetNowSelectionProperties</a></li><li><a href="global.html#L_GetNowSelectionVolume">L_GetNowSelectionVolume</a></li><li><a href="global.html#L_GetObjectNameWithId">L_GetObjectNameWithId</a></li><li><a href="global.html#L_GetPropertiesById">L_GetPropertiesById</a></li><li><a href="global.html#L_HideModelWithIndex">L_HideModelWithIndex</a></li><li><a href="global.html#L_HideNowSelection">L_HideNowSelection</a></li><li><a href="global.html#L_HideWithId">L_HideWithId</a></li><li><a href="global.html#L_HideWithName">L_HideWithName</a></li><li><a href="global.html#L_Initialize">L_Initialize</a></li><li><a href="global.html#L_InitializeWithOptions">L_InitializeWithOptions</a></li><li><a href="global.html#L_IsolateNowSelection">L_IsolateNowSelection</a></li><li><a href="global.html#L_IsolateWithId">L_IsolateWithId</a></li><li><a href="global.html#L_IsolateWithName">L_IsolateWithName</a></li><li><a href="global.html#L_LoadModelWithModelOptions">L_LoadModelWithModelOptions</a></li><li><a href="global.html#L_LoadModelWithPath">L_LoadModelWithPath</a></li><li><a href="global.html#L_SearchModelWithName">L_SearchModelWithName</a></li><li><a href="global.html#L_SetAllVisibility">L_SetAllVisibility</a></li><li><a href="global.html#L_SetCameraDefaultViewState">L_SetCameraDefaultViewState</a></li><li><a href="global.html#L_SetCameraMode">L_SetCameraMode</a></li><li><a href="global.html#L_SetCameraWithData">L_SetCameraWithData</a></li><li><a href="global.html#L_SetColorWithId">L_SetColorWithId</a></li><li><a href="global.html#L_SetGhosting">L_SetGhosting</a></li><li><a href="global.html#L_SetNowSelectionColor">L_SetNowSelectionColor</a></li><li><a href="global.html#L_SetProgressLogo">L_SetProgressLogo</a></li><li><a href="global.html#L_SetSelect">L_SetSelect</a></li><li><a href="global.html#L_SetSelectColor">L_SetSelectColor</a></li><li><a href="global.html#L_SetViewerPosition">L_SetViewerPosition</a></li><li><a href="global.html#L_SetViewerSize">L_SetViewerSize</a></li><li><a href="global.html#L_ShowAllModel">L_ShowAllModel</a></li><li><a href="global.html#L_ShowModelWithHideKey">L_ShowModelWithHideKey</a></li><li><a href="global.html#L_UnloadAllMode">L_UnloadAllMode</a></li><li><a href="global.html#L_UnloadModelWithIndex">L_UnloadModelWithIndex</a></li><li><a href="global.html#L_UnloadModelWithModelGUID">L_UnloadModelWithModelGUID</a></li><li><a href="global.html#L_UnloadModelWithModelName">L_UnloadModelWithModelName</a></li><li><a href="global.html#L_UnloadModelWithModelPath">L_UnloadModelWithModelPath</a></li><li><a href="global.html#zhiu_ChangeAllMaterialColor">zhiu_ChangeAllMaterialColor</a></li><li><a href="global.html#zhiu_ClearLocalStorage">zhiu_ClearLocalStorage</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowNameWithId">zhiu_FilterTool_FilterNowNameWithId</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowSelectionName">zhiu_FilterTool_FilterNowSelectionName</a></li><li><a href="global.html#zhiu_FilterTool_FilterNowSelectionVolume">zhiu_FilterTool_FilterNowSelectionVolume</a></li><li><a href="global.html#zhiu_FilterTool_FilterVolumeWithId">zhiu_FilterTool_FilterVolumeWithId</a></li><li><a href="global.html#zhiu_FirstPerson_Toggle">zhiu_FirstPerson_Toggle</a></li><li><a href="global.html#zhiu_GetAggregateDataWithId">zhiu_GetAggregateDataWithId</a></li><li><a href="global.html#zhiu_GetAllIds">zhiu_GetAllIds</a></li><li><a href="global.html#zhiu_GetAllModels">zhiu_GetAllModels</a></li><li><a href="global.html#zhiu_GetCameraStringData">zhiu_GetCameraStringData</a></li><li><a href="global.html#zhiu_GetGUID">zhiu_GetGUID</a></li><li><a href="global.html#zhiu_GetHideObjectId">zhiu_GetHideObjectId</a></li><li><a href="global.html#zhiu_GetIsolateObjectId">zhiu_GetIsolateObjectId</a></li><li><a href="global.html#zhiu_GetModelIndexWithModel">zhiu_GetModelIndexWithModel</a></li><li><a href="global.html#zhiu_GetModelInstanceTree">zhiu_GetModelInstanceTree</a></li><li><a href="global.html#zhiu_GetModelLength">zhiu_GetModelLength</a></li><li><a href="global.html#zhiu_GetModelWithModelGUID">zhiu_GetModelWithModelGUID</a></li><li><a href="global.html#zhiu_GetModelWithModelIndex">zhiu_GetModelWithModelIndex</a></li><li><a href="global.html#zhiu_GetScreenShot">zhiu_GetScreenShot</a></li><li><a href="global.html#zhiu_GetUnitOfMeasurement">zhiu_GetUnitOfMeasurement</a></li><li><a href="global.html#zhiu_GetUnitOfScale">zhiu_GetUnitOfScale</a></li><li><a href="global.html#zhiu_PersistentCameraDataToLocal">zhiu_PersistentCameraDataToLocal</a></li><li><a href="global.html#zhiu_RefreshScene">zhiu_RefreshScene</a></li><li><a href="global.html#zhiu_ResetCameraWithLocalData">zhiu_ResetCameraWithLocalData</a></li><li><a href="global.html#zhiu_SearchObjectWithProperty">zhiu_SearchObjectWithProperty</a></li><li><a href="global.html#zhiu_SearchObjectWithPropertyByModel">zhiu_SearchObjectWithPropertyByModel</a></li><li><a href="global.html#zhiu_SetCameraWithStringData">zhiu_SetCameraWithStringData</a></li><li><a href="global.html#zhiu_SetModelVisibility">zhiu_SetModelVisibility</a></li><li><a href="global.html#zhiu_SetUnitOfMeasurement">zhiu_SetUnitOfMeasurement</a></li><li><a href="global.html#zhiu_ToggleFullScreen">zhiu_ToggleFullScreen</a></li><li><a href="global.html#zhiu_UnloadModelWithModel">zhiu_UnloadModelWithModel</a></li><li><a href="global.html#zhiu_WorldToScreen">zhiu_WorldToScreen</a></li><li><a href="global.html#ZhiUTech_SettingsL_GetConfig">ZhiUTech_Settings  L_GetConfig</a></li><li><a href="global.html#ZhiUTech_SettingsL_RestoreConfig">ZhiUTech_Settings  L_RestoreConfig</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetBrightness_SpecialEffectFilter">ZhiUTech_Settings  L_SetBrightness_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetContrast_SpecialEffectFilter">ZhiUTech_Settings  L_SetContrast_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetExposure_SpecialEffectFilter">ZhiUTech_Settings  L_SetExposure_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetGrayscale_SpecialEffectFilter">ZhiUTech_Settings  L_SetGrayscale_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetShadowPosition">ZhiUTech_Settings  L_SetShadowPosition</a></li><li><a href="global.html#ZhiUTech_SettingsL_SetSkyOrGroundColor">ZhiUTech_Settings  L_SetSkyOrGroundColor</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleColorEnhancement_SpecialEffectFilter">ZhiUTech_Settings  L_ToggleColorEnhancement_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleColorFidelity_SpecialEffectFilter">ZhiUTech_Settings  L_ToggleColorFidelity_SpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleFXAA">ZhiUTech_Settings  L_ToggleFXAA</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleGroundReflection">ZhiUTech_Settings  L_ToggleGroundReflection</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleGroundShadow">ZhiUTech_Settings  L_ToggleGroundShadow</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleInstantRendering">ZhiUTech_Settings  L_ToggleInstantRendering</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleQualityFirst">ZhiUTech_Settings  L_ToggleQualityFirst</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleSequentialRendering">ZhiUTech_Settings  L_ToggleSequentialRendering</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleShadow">ZhiUTech_Settings  L_ToggleShadow</a></li><li><a href="global.html#ZhiUTech_SettingsL_ToggleSpecialEffectFilter">ZhiUTech_Settings  L_ToggleSpecialEffectFilter</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerInitialize_ZhiUTech_ThreeJsMaker">ZhiUTech_ThreeJsMaker  Initialize_ZhiUTech_ThreeJsMaker</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_AddObject">ZhiUTech_ThreeJsMaker  L_AddObject</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_AddRaycastListener">ZhiUTech_ThreeJsMaker  L_AddRaycastListener</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_ClearAllWorkArea">ZhiUTech_ThreeJsMaker  L_ClearAllWorkArea</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_CreateScene">ZhiUTech_ThreeJsMaker  L_CreateScene</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_Delete3DPoint">ZhiUTech_ThreeJsMaker  L_Delete3DPoint</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteAll3DPoint">ZhiUTech_ThreeJsMaker  L_DeleteAll3DPoint</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteAllBillboarb">ZhiUTech_ThreeJsMaker  L_DeleteAllBillboarb</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteAllObject">ZhiUTech_ThreeJsMaker  L_DeleteAllObject</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteAllOBJModel">ZhiUTech_ThreeJsMaker  L_DeleteAllOBJModel</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteAllPolygon">ZhiUTech_ThreeJsMaker  L_DeleteAllPolygon</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteBillboarb">ZhiUTech_ThreeJsMaker  L_DeleteBillboarb</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteObject">ZhiUTech_ThreeJsMaker  L_DeleteObject</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteOBJModel">ZhiUTech_ThreeJsMaker  L_DeleteOBJModel</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeletePolygon">ZhiUTech_ThreeJsMaker  L_DeletePolygon</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteScene">ZhiUTech_ThreeJsMaker  L_DeleteScene</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_DeleteWorkArea">ZhiUTech_ThreeJsMaker  L_DeleteWorkArea</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_GetSceneWithName">ZhiUTech_ThreeJsMaker  L_GetSceneWithName</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_GetTouchPoint">ZhiUTech_ThreeJsMaker  L_GetTouchPoint</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_GetTransformControllerData">ZhiUTech_ThreeJsMaker  L_GetTransformControllerData</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_LoadOBJModel">ZhiUTech_ThreeJsMaker  L_LoadOBJModel</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_LoadOBJModelWithMtlFile">ZhiUTech_ThreeJsMaker  L_LoadOBJModelWithMtlFile</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_Make3DPoint">ZhiUTech_ThreeJsMaker  L_Make3DPoint</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_MakeBillboarb">ZhiUTech_ThreeJsMaker  L_MakeBillboarb</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_MakePolygon">ZhiUTech_ThreeJsMaker  L_MakePolygon</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_MakeWorkArea">ZhiUTech_ThreeJsMaker  L_MakeWorkArea</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_OnTransformControllerChanged">ZhiUTech_ThreeJsMaker  L_OnTransformControllerChanged</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_RecoveryTransformControllerData">ZhiUTech_ThreeJsMaker  L_RecoveryTransformControllerData</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_ReductionMainDirectionByDataString">ZhiUTech_ThreeJsMaker  L_ReductionMainDirectionByDataString</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_RefreshScene">ZhiUTech_ThreeJsMaker  L_RefreshScene</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_Set3DPointVisible">ZhiUTech_ThreeJsMaker  L_Set3DPointVisible</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetBillboarbVisibility">ZhiUTech_ThreeJsMaker  L_SetBillboarbVisibility</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetMainVector">ZhiUTech_ThreeJsMaker  L_SetMainVector</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetOBJModelVisible">ZhiUTech_ThreeJsMaker  L_SetOBJModelVisible</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetPolygonVisible">ZhiUTech_ThreeJsMaker  L_SetPolygonVisible</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetWGS84ReferencePoint">ZhiUTech_ThreeJsMaker  L_SetWGS84ReferencePoint</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_SetWorkAreaVisibility">ZhiUTech_ThreeJsMaker  L_SetWorkAreaVisibility</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_TestPolygonCollision">ZhiUTech_ThreeJsMaker  L_TestPolygonCollision</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_ToggleRaycast">ZhiUTech_ThreeJsMaker  L_ToggleRaycast</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_ToggleTransformController">ZhiUTech_ThreeJsMaker  L_ToggleTransformController</a></li><li><a href="global.html#ZhiUTech_ThreeJsMakerL_WGS84ToViewerCoordinate">ZhiUTech_ThreeJsMaker  L_WGS84ToViewerCoordinate</a></li><li><a href="global.html#ZhiUTech_TweenCtrlL_Tween">ZhiUTech_TweenCtrl L_Tween</a></li></ul></div>
+                    </nav>
+                </div>
+            </div>
+            <div class="column is-9-desktop">
+                <div class="content" id="main-content-wrapper">
+                    <header class="page-title">
+                        <p>Class</p>
+                        <h1>HitInfo</h1>
+                    </header>
+                    
+                    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>HitInfo<span class="signature">(distance, faceIndex, faceIndex, object, point)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <h3 class="title"><span>Constructor</span></h3>
+                <div class="members">
+                    <div class="member">
+
+    
+    <h4 class="name" id="HitInfo">
+        
+        <span class="code-name">
+            new HitInfo<span class="signature">(distance, faceIndex, faceIndex, object, point)</span><span class="type-signature"></span>
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        射线检测返回的信息格式 (该类仅用于形容数据格式,不可使用new关键词调用)
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>distance</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">float</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">距离</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>faceIndex</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">THREE.Face3</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">顶点索引信息</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>faceIndex</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">顶点索引数量</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>object</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">THREE.Mesh</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">物体</td>
+</tr>
+
+
+    
+
+        
+<tr class="deep-level-0">
+  
+      <td class="name"><code>point</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">THREE.Point</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">击中位置</td>
+</tr>
+
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="zhiu_Foundation_ZhiUTech.js.html" class="button">View Source</a>
+            <span>
+                <a href="zhiu_Foundation_ZhiUTech.js.html">zhiu_Foundation/ZhiUTech.js</a>, <a href="zhiu_Foundation_ZhiUTech.js.html#line3170">line 3170</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+                </div>
+            </div>
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Aug 28 2019 18:12:21 GMT+0800 (GMT+08:00)</p>
+        <p class="sidebar-created-by">
+            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
+        </p>
+    </div>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/app.min.js"></script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

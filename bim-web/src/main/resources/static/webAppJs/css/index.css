@@ -1,0 +1,120 @@
+body {
+    background-color: #efeff4;
+    /* margin: 10px; */
+}
+
+.mui-bar-tab {
+    bottom: 0;
+    display: table;
+    width: 100%;
+    height: 0.66666666rem;
+    padding: 0;
+    table-layout: fixed;
+    border-top: 0;
+    border-bottom: 0;
+    -webkit-touch-callout: none;
+}
+
+.mui-bar {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 0.58666666rem;
+    border-bottom: 0;
+    background-color: #f7f7f7;
+    -webkit-box-shadow: 0 0 0.01333333rem rgba(0, 0, 0, .85);
+    box-shadow: 0 0 0.01333333rem rgba(0, 0, 0, .85);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active {
+    color: #007aff;
+}
+
+.mui-bar-tab .mui-tab-item {
+    display: table-cell;
+    overflow: hidden;
+    width: 1%;
+    height: 0.66666666rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #929292;
+}
+
+.mui-bar-tab .mui-tab-item .BIM-iconfont {
+    top: 0.04rem;
+    width: 0.32rem;
+    height: 0.32rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.mui-bar .mui-icon {
+    font-size: 0.32rem;
+    position: relative;
+    z-index: 20;
+    padding-top: 0.13333333rem;
+    padding-bottom: 0.13333333rem;
+}
+
+.BIM-iconfont {
+    font-family: Muiicons;
+    font-size: 0.32rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.NoData .BIM-iconfont {
+    display: block;
+    font-size: 1rem;
+}
+
+.NoData {
+    font-size: 0.24rem;
+    text-align: center;
+    color: #8c3a11;
+    margin-top: 2rem;
+}
+
+
+.mui-bar-tab .mui-tab-item .BIM-iconfont~.mui-tab-label {
+    font-size: 0.14666666rem;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gerenzhuye {
+    position: relative;
+}
+
+span.layui-badge-dot {
+    width: 0.24rem;
+    height: 0.24rem;
+    font-size: 0.16rem;
+    text-align: center;
+    position: absolute;
+    top: 0.05333333rem;
+    right: 0.26666666rem;
+    line-height: 0.24rem;
+    display: none;
+}
+.layui-m-BIMbtn span[yes]{
+    color: #01529f !important;
+}
+.layui-form-radio>i:hover, .layui-form-radioed>i{
+    color: #01529f !important;
+}
+
+.input_input{
+    color: #FFFFFF;
+    opacity: 0;
+}

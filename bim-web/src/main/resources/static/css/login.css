@@ -1,0 +1,117 @@
+body{
+    background: -webkit-linear-gradient(#014294, #1ba3e1); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#014294, #1ba3e1); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#014294, #1ba3e1); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#014294, #1ba3e1); /* 标准的语法 */
+}
+.backgroundDiv{
+    background: url('../img/login.png') center center no-repeat;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+}
+.loginTitle{
+    font-size: 6rem;
+    color: #FFFFFF;
+    position: fixed;
+    top: 36rem;
+    left: 31rem;
+}
+.loginSix,.registerSix{
+    width: 65vmin;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 11%;
+    margin: auto;
+    background: url(../img/Login_Hexagon_background.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.p_title{
+    margin-bottom: 10vmin !important;
+}
+.registerSix .p_title{
+    margin-bottom: 8vmin !important;
+}
+.registerSix form{
+    width: 100%;
+    text-align: center;
+    margin-top: 28vmin;
+}
+.loginSix form div,.registerSix form div{
+    width: 70%;
+    margin: 2vmin auto;
+    position: relative;
+}
+.loginSix form div i:first-child,.registerSix form div i:first-child {
+    font-size: 1.5vmin;
+    line-height: 38px;
+    position: absolute;
+    left: 10%;
+}
+.loginSix form div i:last-child,.registerSix form div i:last-child {
+     font-size: 1.5vmin;
+     line-height: 38px;
+     position: absolute;
+     right: 10%;
+    top: 0;
+ }
+
+.loginSix  form{
+    width: 100%;
+    text-align: center;
+    margin-top: 28vmin;
+}
+.layui-input{
+    width: 100%;
+    color: #666666;
+    font-size: 1.5vmin;
+    border-radius: 100px;
+    margin: auto;
+    padding: 0 25%;
+}
+.loginSix form p,.registerSix form p{
+    font-size: 4.5vmin;
+    color: #FFFFFF;
+}
+.operationBtn{
+    position: inherit !important;
+}
+
+.operationBtn input.layui-btn{
+    width: 100px;
+}
+.registerSix{
+    display: none;
+}
+.layui-btn-disabled, .layui-btn-disabled:active, .layui-btn-disabled:hover{
+    background-color: #009688;
+    color: #FFFFFF;
+    border: none;
+}
+#Send_Code{
+    width: 25%;
+    font-size: 1.5vmin;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 20px 20px 0px;
+}
+.icon-yanjing-bi,.icon-ai-eye{
+    text-align: right;
+    right: 20%;
+}
+.icon-yanjing-bi,.icon-ai-eye:hover{
+    cursor:pointer;
+}
+.ipad_t{
+    display: none;
+    width: 100%;
+    height:100%;
+    position:fixed;
+    background:rgb(0,0,0);
+    z-index: 1;
+}

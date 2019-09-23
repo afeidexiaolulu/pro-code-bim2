@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.MessageMapper">
+    <!--根据用户查询接收问题列表-->
+    <select id="selectMessageByUser" resultType="com.zy.bim.bean.MessageVo">
+        SELECT
+        tp.id id,
+        tm.id messageId,
+        project.project_name projectName,
+        tp.grade grade,
+        tp.problem_name problemName,
+        tm.send_person sendPerson,
+        tu.user_name sendPersonName,
+        tm.send_type sendType,
+        ti.`status` `status`,
+        ti.read_status readStatus,
+        tm.create_time createTime
+        FROM
+        t_problem_list tp
+        LEFT JOIN t_message tm ON tp.id = tm.parent_id
+        LEFT JOIN t_messageinfo ti ON tm.id = ti.parent_id
+        LEFT JOIN t_user tu ON ti.receive_person = tu.id
+        LEFT JOIN t_project project ON tp.parent_id = project.id
+<where>
+    ti.receive_person = #{userId}
+    <if test="status != null and status != ''">
+         and ti.status = #{status}
+    </if>
+</where>
+    group by tp.id
+	order by tm.create_time desc
+    limit #{currentPage},#{pageSize}
+    </select>
+    <!--查询问题详情-->
+    <select id="getInfoById" resultType="com.zy.bim.bean.MessageInfo" parameterType="java.lang.Integer">
+        SELECT
+	        *
+        FROM
+	        t_messageinfo
+        WHERE parent_id = #{id}
+        order by create_time desc limit 1
+    </select>
+    <!--查询问题数量-->
+    <select id="getReadNum" resultType="java.lang.Integer" parameterType="java.lang.String">
+         SELECT count(1) FROM t_messageinfo
+         <where>
+             receive_person =  #{userId}
+             <if test="readStatus != null and readStatus != '' ">
+                 and read_status = #{readStatus}
+             </if>
+         </where>
+
+    </select>
+    <!--信息回复列表-->
+    <select id="selectMessageInfoList" parameterType="java.lang.Integer" resultType="com.zy.bim.bean.MessageVo">
+            SELECT
+	            tu.user_name sendPersonName,
+	            tm.create_time createTime,
+	            tm.info info,
+	            tt.is_end isEnd
+            FROM
+	            t_messageinfo tm
+	        LEFT JOIN t_user tu ON tm.create_person = tu.id
+	        LEFT JOIN t_message tt ON tm.parent_id = tt.id
+            WHERE
+	            tm.parent_id = #{parentId}
+    </select>
+    <!--查询messageId-->
+    <select id="getMessageId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT id FROM t_message WHERE parent_id = #{problemId}
+    </select>
+    <!--查询消息对象-->
+    <select id="getMessageById" parameterType="java.lang.Integer" resultType="com.zy.bim.bean.Message">
+        SELECT * FROM t_message where id = #{messageId}
+    </select>
+    <!-- 新增问题转发 -->
+    <insert id="insert" parameterType="com.zy.bim.bean.Message" useGeneratedKeys="true" keyProperty="id">
+        insert into t_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="sendPerson != null">
+                send_person,
+            </if>
+
+            <if test="sendType != null">
+                send_type,
+            </if>
+
+            <if test="createPerson != null">
+                create_person,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updatePerson != null">
+                update_person,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="isEnd != null">
+                is_end,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="sendPerson != null">
+                #{sendPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="sendType != null">
+                #{sendType,jdbcType=VARCHAR},
+            </if>
+
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePerson != null">
+                #{update_person,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isEnd != null">
+                #{isEnd,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 新增问题详情 -->
+    <insert id="insertMessageInfo" parameterType="com.zy.bim.bean.MessageInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into t_messageinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+            <if test="createPerson != null">
+                create_person,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updatePerson != null">
+                update_person,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="readStatus != null">
+                read_status,
+            </if>
+            <if test="receivePerson != null">
+                receive_person,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="info != null">
+                #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatePerson != null">
+                #{updatePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="readStatus != null">
+                #{readStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="receivePerson != null">
+                #{receivePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.zy.bim.bean.Message">
+        update t_message set
+        <if test="parentId != null and parentId !=''">
+            parent_id = #{parentId},
+        </if>
+        <if test="sendPerson != null and sendPerson !=''">
+            send_person = #{sendPerson},
+        </if>
+        <if test="sendPerson != null and sendPerson !=''">
+            send_person = #{sendPerson},
+        </if>
+
+        <if test="createPerson != null and createPerson !=''">
+            create_person = #{createPerson},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="updatePerson != null and updatePerson !=''">
+            update_person = #{updatePerson},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+        <if test="isEnd != null">
+            is_end = #{isEnd}
+        </if>
+        where id = #{id}
+    </update>
+    <!--更新问题详情表-->
+    <update id="updateInfo" parameterType="com.zy.bim.bean.MessageInfo">
+         update t_messageinfo set
+        <if test="parentId != null and parentId !=''">
+            parent_id = #{parentId},
+        </if>
+        <if test="info != null and info !=''">
+            info = #{info},
+        </if>
+        <if test="createPerson != null and createPerson !=''">
+            create_person = #{createPerson},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime},
+        </if>
+        <if test="updatePerson != null and updatePerson !=''">
+            update_person = #{updatePerson},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime},
+        </if>
+        <if test="readStatus != null">
+            read_status = #{readStatus},
+        </if>
+        <if test="receivePerson != null">
+            receive_person = #{receivePerson},
+        </if>
+        <if test="status != null and status !=''">
+            status = #{status}
+        </if>
+        where id = #{id}
+    </update>
+    <!--更新处理状态-->
+    <update id="updateInfoStatus" parameterType="java.lang.Integer">
+        UPDATE t_messageinfo
+            SET status = 'yichuli'
+        WHERE
+	    parent_id = #{messageId}
+    </update>
+
+    <!-- 根据问题id和发送人id查询处理人-->
+    <select id="queryProblemSolverName" parameterType="map" resultType="string">
+        SELECT u.user_name from t_messageinfo mi,t_user u WHERE mi.create_person = #{sendPerson} AND mi.parent_id = #{messageId} AND mi.receive_person = u.id ORDER BY mi.create_time LIMIT 1
+    </select>
+
+</mapper>

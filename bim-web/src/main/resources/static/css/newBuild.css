@@ -1,0 +1,214 @@
+.layui-form-label {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.layui-contain {
+    padding: 35px 85px;
+    background: #FFF;
+}
+
+.ToolsUsed label {
+    width: 210px;
+}
+
+.ToolsUsed>.layui-input-block {
+    margin-left: 240px;
+}
+
+.layui-form-item:last-child div {
+    text-align: center;
+}
+
+.layui-table thead tr {
+    background-color: #a0a0a0;
+    color: #FFFFFF;
+}
+
+.layui-table tbody tr:last-child td:last-child {
+    text-align: right;
+}
+
+.layui-table tbody tr:hover {
+    background: inherit !important;
+}
+
+.layui-table tbody {
+    background: #eeeeee;
+}
+
+em {
+    color: red;
+    font-size: 14px;
+    float: left;
+}
+
+.layui-form-item:last-child {
+    text-align: center;
+}
+
+/* 进度条 */
+.progress-bar {
+    height: 20px;
+    border-radius: 10px;
+    background: #0e73c1;
+}
+
+.progress_bar div.active {
+    background: #a0a0a0;
+    border-radius: 10px;
+    display: block !important;
+}
+
+
+/* 创建项目页 */
+input[name='fileImg'] {
+    width: 80%;
+    float: left;
+    margin-left: 0;
+}
+
+textarea[name='ProjectProfile'] {
+    height: 140px;
+    resize: none;
+}
+
+#upload {
+    line-height: inherit;
+    float: right;
+}
+
+#upload div.webuploader-pick {
+    color: #FFFFFF;
+}
+
+select[name='ProjectManager'] {
+    /* display: none; */
+}
+
+input[name='ProjectManager'] {
+    width: 96%;
+    position: absolute;
+    z-index: 2;
+    border-right: none !important;
+    border-color: #e6e6e6;
+}
+
+input[name='ProjectManager']:hover {
+    border-color: #e6e6e6 !important;
+}
+
+
+/* 创建问题 */
+ul[name='ProblemScreenshot'] {
+    max-height: 230px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+ul[name='ProblemScreenshot'] li {
+    width: 24%;
+    float: left;
+}
+
+ul[name='ProblemScreenshot'] li:first-child {
+    text-align: center;
+}
+
+ul[name='ProblemScreenshot'] li span {
+    line-height: 100px;
+}
+
+ul[name='ProblemScreenshot'] li img {
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+}
+
+textarea[name='QuestionDescribe'] {
+    resize: none;
+}
+#add{
+    line-height: inherit !important;
+}
+
+/* 添加新成员 */
+input[name='NameMember'],
+input[name='phone'],
+input[name='email'] {
+    width: 96%;
+    position: absolute;
+    z-index: 2;
+    border-right: none !important;
+    border-color: #e6e6e6;
+}
+
+input[name='NameMember']:hover,
+.input[name='phone']:hover,
+input[name='email']:hover {
+    border-color: #e6e6e6 !important;
+}
+
+.uploaderScreenshot {
+    height: 220px;
+    border: 1px solid #e6e6e6;
+    overflow: auto;
+}
+
+#uploader .screenshotIMG {
+    width: 110px;
+    height: 110px;
+    float: left;
+    position: relative;
+    text-align: center;
+    margin-left: 8px;
+    margin-top: 8px;
+}
+
+#uploader .screenshotIMG img {
+    width: 100%;
+    height: 100%;
+}
+
+.uploaderScreenshot span.icon-xinjian {
+    font-size: 24px;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.uploaderScreenshot .screenshotIMG img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+}
+
+#uploader .screenshotIMG p.state {
+    width: 100%;
+    background: #333333;
+    opacity: .6;
+    color: #FFFFFF;
+    position: absolute;
+    top: 50px;
+}
+
+#uploader .screenshotIMG span.remove-this {
+    color: #FFFFFF;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#uploader .screenshotIMG div.percentage {
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

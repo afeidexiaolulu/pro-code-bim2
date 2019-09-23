@@ -1,0 +1,51 @@
+.power_contant {
+	font-size: 0.18666666rem;
+}
+
+.plan p,
+.special p {
+	padding: 0.13333333rem;
+	color: #999999;
+}
+
+.plan .layui-form,
+.special .layui-form {
+	background: #FFFFFF;
+}
+
+.layui-form-item {
+	margin: 0
+}
+
+.layui-input-block {
+	text-align: right;
+	padding: 0 0.2rem;
+}
+
+.layui-form-label {
+	width: 2rem;
+	text-align: left;
+	padding: 0.12rem 0.2rem;
+	font-weight: 400;
+	line-height: 0.33333333rem;
+}
+.layui-form-item-button button{
+	display: none;
+}
+.layui-form-item-button button:first-child{
+	display: inline-block;
+}
+.layui-form-switch{
+	height: 0.29333333rem;
+	line-height: 0.29333333rem;
+	min-width: 0.46666666rem;
+	padding: 0 0.06666666rem;
+	margin-top: 0.10666666rem;
+	border: 0.01333333rem solid #d2d2d2;
+	border-radius: 0.26666666rem;
+	border-color: #01529f;
+	background-color: #01529f;
+}
+.layui-form-switch em{
+	color: #FFFFFF !important;
+}

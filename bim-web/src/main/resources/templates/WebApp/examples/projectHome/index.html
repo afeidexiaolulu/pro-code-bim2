@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>BIM轻量化图形平台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" href="../../../webAppJs/css/layui.css">
+	<link rel="stylesheet" href="../../../webAppJs/css/file_icon.css">
+	<link rel="stylesheet" href="../../../webAppJs/css/projectAuthority.css">
+	<link rel="stylesheet" href="../../../webAppJs/css/index.css">
+	<script src="../../../webAppJs/js/jquery-3.1.1.min.js"></script>
+	<script src="../../../webAppJs/js/jquerysession.js"></script>
+	<script src="../../../webAppJs/js/layer_mobile/layer.js"></script>
+	<script src="../../../webAppJs/js/base.js"></script>
+	<script src="../../../webAppJs/js/projiceList.js"></script>
+	<script src="../../../webAppJs/js/nav.js"></script>
+</head>
+
+<body>
+	<div class="layui-form form_title" action="">
+		<input type="search" name="search" placeholder="搜索" autocomplete="off" class="layui-input search"
+			data-type="search"><span class="BIM-iconfont BIMxinzeng" data-type="addProject"></span><span
+			class="BIM-iconfont BIMpaixu" data-type="sort" type="desc"></span>
+		<hr />
+	</div>
+	<div id="layui-projectList"></div>
+
+	<nav class="mui-bar mui-bar-tab">
+		<a class="mui-tab-item mui-active" href="index">
+			<span class="BIM-iconfont BIMxiangmuzhuye"></span>
+			<span class="mui-tab-label">项目主页</span>
+		</a>
+		<a class="mui-tab-item" href="power">
+			<span class="BIM-iconfont BIMquanxianguanli"></span>
+			<span class="mui-tab-label">权限管理</span>
+		</a>
+		<a class="mui-tab-item gerenzhuye" href="individual">
+			<span class="BIM-iconfont BIMgerenzhuye"></span>
+			<span class="mui-tab-label">个人主页</span>
+			<span class="layui-badge-dot"></span>
+		</a>
+		<a class="mui-tab-item" href="services">
+			<span class="BIM-iconfont BIMzengzhifuwu"></span>
+			<span class="mui-tab-label">增值服务</span>
+		</a>
+	</nav>
+
+	<script src="../../../webAppJs/layui/layui.js"></script>
+</body>
+
+</html>

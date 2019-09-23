@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    padding: 30px;
+}
+.layui-table, .layui-table-view{
+    margin:0;
+}
+.layui-fluid {
+    padding: 30px;
+}
+
+.layui-table tbody tr:hover,
+.layui-table thead tr,
+.layui-table-click,
+.layui-table-header,
+.layui-table-hover,
+.layui-table-mend,
+.layui-table-patch,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-total tr,
+.layui-table[lay-even] tr:nth-child(even) {
+    background: #FFFFFF;
+}
+
+.layui-table td,
+.layui-table th,
+.layui-table-col-set,
+.layui-table-fixed-r,
+.layui-table-grid-down,
+.layui-table-header,
+.layui-table-page,
+.layui-table-tips-main,
+.layui-table-tool,
+.layui-table-total,
+.layui-table-view,
+.layui-table[lay-skin=line],
+.layui-table[lay-skin=row] {
+    border: none;
+}
+
+thead tr {
+    border-bottom: 2px solid #d0d5d8;
+    font-size: 18px;
+}
+
+tbody tr td:first-child {
+    border-right: 2px solid #d0d5d8;
+    font-weight: 600;
+}
+
+.layui-table td,
+.layui-table th {
+    text-align: center;
+    font-size: 16px;
+    color: #333333;
+    font-weight: 600;
+}
+
+.tableTbody{
+    height: 600px;
+    overflow: hidden;
+    overflow-x: auto;
+    background: #FFFFFF;
+    position: relative;
+}
+.buttonSubment{
+    float: right;
+}
+.layui-btn{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}

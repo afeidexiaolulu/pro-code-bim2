@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/ModelList.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/0409.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <style>.layui-fluid{display:block;padding:30px 30px;}.layui-input-block{margin:0;}.layui-form{height:360px;min-height:300px;padding:10px 0;overflow-y:auto;}.layui-form-label{width:160px;}.layui-form-item{display:inline-block;width:400px;position:relative;}.label_name{font-weight:600;}.layui-form-item .layui-form-label{width:80px;text-align:center;background:#eeeeee;position:absolute;right:0;top:0;}.layui-form-item:last-child{width:100%;text-align:center;}</style>
+</head>
+
+<body>
+    <div class="layui-fluid layadmin-cmdlist-fluid">
+        <p class="p_title"><span class="iconfont icon-chenggong"></span>成功创建模型链接</p>
+        <div action="" class="layui-form">
+
+        </div>
+        <input type="text" name="urlist" />
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn layui-btn-darkblue" lay-submit lay-filter="*" data-type="yes">一键复制</button>
+                <button type="reset" class="layui-btn layui-btn-primary" data-type="close">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+    <script>
+        layui.use('form', function () {
+            eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('0 2=1.2;0 3=1.3;0 $=1.$;',4,4,'var|layui|form|layer'.split('|'),0,{}))
+
+            let dataList = parent.layer.methodConfig;
+            if (dataList.html == "QuestionsList") {
+                $(".p_title").html('<span class="iconfont icon-chenggong"></span>成功创建问题链接')
+                let str = ""
+                $("form").html("");
+                $.each(dataList.data, function (index, item) {
+                    let f = $.base64.encode("id=" + item.id);
+                    let value = getRootPath() + "/bim/problem/detailsShare?" + f;
+                    str += '<div class="layui-input-block rowList">' +
+                        '<label class="layui-form-label label_name layui-elip ">'+ item.problemName +'</label>' +
+                        '<div class="layui-form-item">' +
+                        '<input type="text" name="url" class="layui-input input_input" readonly="readonly" value="'+ value +'">' +
+                        '</div>' +
+                        '<button class="layui-btn layui-btn-darkblue" lay-submit data-type="oncut">复制链接</button>' +
+                        '</div>'
+                })
+                $(".layui-form").append(str);
+                if (dataList.data.length > 6) {
+                    BeautifyScroll(".layui-form")
+                }
+            }else if(dataList.html == null){
+                let str = ""
+                $("form").html("");
+                $.each(dataList.data, function (index, item) {
+                    let f = $.base64.encode("id=" + item.id);
+                    let shareDay = item.shareDay == "36500" ? "\u6c38\u4e45\u6709\u6548" : "\u8fde\u7eed" + item.shareDay + "\u6709\u6548";
+                    let value = getRootPath() + "/bim/modelShare/modelLightWeightShare?" + f ;
+                    str += '<div class="layui-input-block rowList">' +
+                        '<label class="layui-form-label label_name layui-elip ">'+ item.modelName +'</label>' +
+                        '<div class="layui-form-item">' +
+                        '<input type="text" name="url" class="layui-input input_input" readonly="readonly" value="'+ value +'">' +
+                        '<label class="layui-form-label label_input">'+ shareDay +'</label>' +
+                        '</div>' +
+                        '<button class="layui-btn layui-btn-darkblue" lay-submit data-type="oncut">复制链接</button>' +
+                        '</div>'
+                })
+                $(".layui-form").append(str);
+                if (dataList.data.length > 6) {
+                    BeautifyScroll(".layui-form")
+                }
+            }
+
+            active = {
+                //复制
+                oncut: function () {
+                    debugger
+                    $(this).prev(".layui-form-item").children("input").select();
+                    document.execCommand("copy");
+                    layer.msg("复制成功", {icon:6,anim:6,time:800});
+                },
+                //一键复制
+                yes: function () {
+                    let r = [];
+                    $.each($("input[name='url']"),function(index,item){
+                        r.push($(this).val())
+                    })
+                    $("input[name='urlist']").val(r.join('  '))
+                    $("input").select();
+                    document.execCommand("copy");
+                    layer.msg("一键复制成功", {icon:6,anim:6,time:800});
+                },
+                close: function () {
+                    $maskof();
+                    let index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                }
+            }
+
+            $('.layui-input-block button').click(function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            })
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.bim.dao.ModelMapper">
+    <update id="updateImgByFileId" parameterType="java.lang.String">
+      UPDATE t_model
+        SET model_img = #{newModelImgId}
+      WHERE
+        id = #{modelId}
+    </update>
+
+    <select id="checkModelNameRepetition" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+            COUNT(*)
+        FROM
+            t_model
+        WHERE
+            parent_id = #{parentId}
+            AND model_name = #{modelName}
+    </select>
+
+    <select id="checkProjectManager" parameterType="map" resultType="java.lang.Integer">
+      SELECT
+            COUNT(*)
+        FROM
+            t_user_role_project
+        WHERE
+            user_id = #{userId}
+            AND project_id = #{projectId}
+            AND role_id = '1'
+    </select>
+
+    <select id="checkModelCreatePerson" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        create_person
+      FROM
+        t_model
+      WHERE
+        id = #{id}
+    </select>
+
+    <select id="queryModelImg" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        model_img
+      FROM
+        t_model
+      WHERE
+        id = #{id}
+    </select>
+
+    <select id="queryModelNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+      SELECT
+        model_name
+      FROM
+        t_model
+      WHERE
+        id = #{id}
+    </select>
+
+    <select id="checkModelShareFailureState" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+      SELECT
+	    COUNT( * )
+      FROM
+	    t_model_share
+      WHERE
+	    model_id = #{id}
+	    AND share_statu = 'true'
+    </select>
+
+    <update id="updateModelName" parameterType="map">
+      UPDATE t_model SET model_name = #{newModelName} WHERE id = #{modelId}
+    </update>
+
+</mapper>

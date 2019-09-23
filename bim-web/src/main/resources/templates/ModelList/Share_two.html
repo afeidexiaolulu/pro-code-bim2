@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/layui/css/layui.mobile.css">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="stylesheet" href="../../static/css/font_file.css">
+    <link rel="stylesheet" href="../../static/css/ModelList.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/jquery.nicescroll.js"></script>
+    <script src="../../static/js/base.js"></script>
+    <style>.layui-fluid{display:block;padding:30px 60px;}.layui-form{height:360px;min-height:360px;padding:10px 0;overflow-y:auto;}.layui-form-item:last-child{text-align:center;}</style>
+</head>
+
+<body>
+    <div class="layui-fluid layadmin-cmdlist-fluid">
+        <form action="" class="layui-form"></form>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin: 0;">
+                <button class="layui-btn layui-btn-darkblue" lay-submit lay-filter="*" data-type="yes">创建链接</button>
+                <button type="reset" class="layui-btn layui-btn-primary" data-type="close">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/layui/layui.js"></script>
+    <script>
+        layui.use('form', function () {
+            var form = layui.form;
+            var layer = layui.layer;
+            var $ = layui.$;
+
+            let dataList = parent.layer.methodConfig;
+            var dataListLength = dataList.length;
+            $("form").html("");
+            let str = ""
+            $.each(dataList, function (key, value) {
+                str += '<div class="form_div">' +
+                    '<div>' +
+                    '<input type="text" class="label_id" hidden="hidden" value=' + value.id +
+                    ' />' +
+                    '<label class="layui-form-label label_one layui-elip">' + value.modelName +
+                    '</label>' +
+                    '</div><div class="layui-form-item label_two">' +
+                    '<label class="layui-form-label">有效期：</label>' +
+                    '<div class="layui-input-block">' +
+                    '<select name="DAY" lay-verify="DAY">' +
+                    '<option value=""></option>' +
+                    '<option value="3">3天</option>' +
+                    '<option value="5">5天</option>' +
+                    '<option value="7">7天</option>' +
+                    '<option value="36500">永久</option>' +
+                    '</select></div></div></div>'
+
+            })
+            $("form").append(str);
+            if (dataListLength > 6) {
+                BeautifyScroll(".layui-form")
+            }
+            form.render();
+
+            active = {
+                yes: function () {
+                    for (let i = 0; i < $(".form_div").length; i++) {
+                        const NoChoice = $(".form_div:eq(" + i + ")").children("div.label_two")
+                            .children("div.layui-input-block").children("select").val();
+                        if (NoChoice == "") {
+                            layer.msg('请选择天数', {
+                                icon: 5,
+                                anim: 6,
+                                time:600
+                            });
+                            return true;
+                        }
+                    }
+
+                    var datalist = '';
+                    for (let i = 0; i < $(".form_div").length; i++) {
+                        const modelName = $(".form_div:eq(" + i + ")").children("div").children(
+                            ".label_one").html();
+                        const shareDay = $(".form_div:eq(" + i + ")").children("div.label_two")
+                            .children("div.layui-input-block").children("select").val();
+                        const modelId = $(".form_div:eq(" + i + ")").children("div").children(
+                            ".label_id").val();
+                        datalist += "{shareDay:" + shareDay + ",modelName:'" + modelName +
+                            "',modelId:" + modelId + "},"
+                    }
+                    $.ajax({
+                        url: getRootPath() + "/bim/modelShare/insertModelShareBatch",
+                        type: "post",
+                        data: {
+                            modelShareBatch: datalist
+                        },
+                        beforeSend: function () {
+                            layer.load(2);
+                        },
+                        complete: function () {
+                            layer.closeAll('loading');
+                        },
+                        success: function (data_) {
+                            debugger
+                            if (data_.success == true) {
+                                layer.methodConfig = data_;
+                                layer.open({
+                                    type: 2,
+                                    title: false,
+                                    closeBtn: 0,
+                                    shade: [.5],
+                                    area: ['100%', '100%'],
+                                    content: ['linkTwo', 'no'],
+                                    end: function () {
+                                        close();
+                                    }
+                                });
+                            } else {
+                                layer.msg(data_.message);
+                            }
+                        },
+                        error: function () {
+                            layer.msg("请求失败，请稍后再试", {
+                                icon: 5,
+                                anim: 6
+                            })
+                        }
+                    })
+
+                },
+                close: function () {
+                    close();
+                }
+            }
+
+            function close() {
+                $maskof();
+                let index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+
+            $('.layui-input-block button').click(function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            })
+
+        });
+
+    </script>
+</body>
+
+</html>

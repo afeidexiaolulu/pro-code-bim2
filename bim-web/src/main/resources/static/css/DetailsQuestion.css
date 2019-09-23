@@ -1,0 +1,156 @@
+body {
+    background: #f4f6f8;
+}
+.cmdlist-text img {
+    width: 100%;
+
+}
+.layui-fluid {
+    padding: 30px;
+}
+.layui-div{
+    position: relative;
+}
+.layui-div  .layui-form{
+    position: absolute;
+    top: -5px;
+    left: 0;
+}
+.cmdlist-container {
+    background: #fff;
+    border: 1px solid transparent;
+    padding: 20px;
+}
+
+.cmdlist-container img {
+    width:100%;
+}
+
+.cmdlist-text {
+    padding: 20px 0 0;
+    height: 275px !important;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.cmdlist-text .price {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.cmdlist-text .price p {
+    display: inline-block;
+}
+.ParkManagement .price:last-child{
+    max-width: 500px;
+}
+.cmdlist-text .flow {
+    text-align: right;
+    float: right;
+}
+#hold{
+    display: none;
+}
+.btnClass{
+    float: right;
+}
+.layui-title-button p {
+    font-size: 32px;
+    color: #2e85c1;
+    display: inline-block;
+}
+.add .remove_this{
+    display: none;
+}
+em {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    color: #FFFFFF;
+    border-radius: 10px;
+    background: red;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    display: none;
+}
+
+
+/* 问题详情新增 */
+.describe{
+    font-size: 18px;
+    text-indent: 2em;
+    line-height: 1.6;
+}
+.screenshot div.cmdlist-container{
+    padding: inherit;
+}
+.screenshot div.cmdlist-text{
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.HorizontalRolling{
+    flex-shrink: 0;
+}
+.screenshotIMG{
+    width: 240px;
+    height: 240px;
+    text-align: center;
+    margin-left: 10px;
+    float: left;
+    position: relative;
+}
+div.imgDiv{
+    width: 240px;
+    height: 240px;
+}
+.screenshotIMG img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid #2e85c1;
+}
+div.add{
+    position: relative;
+    text-align: center;
+}
+span.icon-xinjian{
+    font-size: 48px;
+    position: absolute;
+    top:90px;
+    right:0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+.layui-elip span.grade span.icon-jinggaotianchong{
+    margin-left: 10px;
+}
+.layui-elip span.grade span.icon-jinggaotianchong:hover{
+    cursor:inherit;
+}
+
+
+/*上传*/
+#uploader .screenshotIMG p.state {
+    width: 100%;
+    background: #333333;
+    opacity: .6;
+    color: #FFFFFF;
+    position: absolute;
+    top: 105px;
+}
+
+#uploader .screenshotIMG span.remove_this {
+    color: #FF5722;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+#uploader .screenshotIMG div.percentage {
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

@@ -1,0 +1,118 @@
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: #797878;
+}
+
+.addProject {
+	margin: 0.13333333rem;
+}
+
+.addProject input,
+.addProject textarea,
+.addProject div {
+	margin-top: 0.13333333rem;
+}
+
+.layui-form-item {
+	text-align: center;
+}
+
+.layui-btn {
+	padding: 0 0.8rem;
+}
+
+.upload_project {
+	width: 100%;
+	min-height: 1.6rem;
+	margin-bottom: 0.5rem;
+	background: #FFFFFF;
+	position: relative;
+}
+
+.upload_project p {
+	color: #797878;
+	padding: 0.13333333rem;
+}
+
+
+#uploader {
+	padding-bottom: 0.13333333rem;
+	text-align: center;
+}
+
+.BIMxinzeng {
+	font-size: 0.6rem !important;
+}
+
+.screenshotIMG {
+	position: relative;
+	margin: 0.13333333rem;
+}
+
+.state {
+	height: 0.4rem;
+	text-align: center;
+	line-height: 0.4rem;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: #212020;
+	color: #FFFFFF;
+	margin-top: 0 !important;
+}
+
+.progress {
+	height: 0.4rem;
+	text-align: center;
+	line-height: 0.4rem;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: #212020;
+	color: #FFFFFF;
+	margin-top: 0 !important;
+}
+
+#uploader span.BIMxinzeng div:last-child {
+	top: 0 !important;
+	left: 0 !important;
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+}
+
+#uploader .webuploader-pick {
+	display: none;
+}
+
+
+
+.ProjectManager {
+	width: 4.73333333rem;
+	max-height: 140px;
+	overflow-y: auto;
+	background: #FFFF;
+	position: absolute;
+	box-shadow: 0px 0.02666666rem 0.02666666rem #000000;
+	z-index: 999;
+	opacity: 1;
+	display: none;
+}
+
+.ProjectManager ul {
+	padding: 0.13333333rem;
+}
+
+.ProjectManager ul li {
+	padding: 0.06666666rem 0;
+	border-bottom: 1px solid #E1E1E1;
+}
+
+.ProjectManager ul li:last-child {
+	border: none;
+}
