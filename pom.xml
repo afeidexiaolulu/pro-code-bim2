@@ -44,7 +44,7 @@
         <mybatisplus.verson>2.1.9</mybatisplus.verson>
         <shiro.version>1.4.0</shiro.version>
         <xml.version>1.4.01</xml.version>
-        <poi.version>3.9</poi.version>
+        <poi.version>4.1.1</poi.version>
         <aliyun.version>4.1.0</aliyun.version>
         <ftpnet.version>3.5</ftpnet.version>
         <dadiyang.version>1.0.4</dadiyang.version>
